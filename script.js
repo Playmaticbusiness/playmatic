@@ -67,27 +67,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
     revealOnScroll();
-    window.addEventListener('scroll', revealOnScroll);
 
-    // Navbar Background Blur Enhancements & Logo position
-    const navbar = document.querySelector('.navbar');
+    // --- SINGLE THROTTLED SCROLL HANDLER (performance) ---
+    const heroContent = document.querySelector('.hero-content');
+    let scrollRAF = null;
 
-    // Set initial state
-    if (window.scrollY <= 50) {
-        navbar.classList.add('at-top');
-    }
+    const onScroll = () => {
+        if (scrollRAF) return; // already scheduled, skip
+        scrollRAF = requestAnimationFrame(() => {
+            scrollRAF = null;
+            const scrolled = window.scrollY;
 
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.style.background = 'rgba(13, 13, 16, 0.95)';
-            navbar.style.padding = '15px 5%';
-            navbar.classList.remove('at-top');
-        } else {
-            navbar.style.background = 'transparent';
-            navbar.style.padding = '20px 5%';
-            navbar.classList.add('at-top');
-        }
-    });
+            // 1. Reveal animations
+            revealOnScroll();
+
+            // 2. Navbar background
+            if (scrolled > 50) {
+                navbar.style.background = 'rgba(13, 13, 16, 0.95)';
+                navbar.style.padding = '15px 5%';
+                navbar.classList.remove('at-top');
+            } else {
+                navbar.style.background = 'transparent';
+                navbar.style.padding = '20px 5%';
+                navbar.classList.add('at-top');
+            }
+
+            // 3. Parallax (only in hero range, cheap check first)
+            if (scrolled < 600 && heroContent) {
+                heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
+                heroContent.style.opacity = 1 - (scrolled / 500);
+            }
+        });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
 
     // Web3Forms AJAX Submission
     const form = document.querySelector('.contact-form');
@@ -144,15 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Parallax effect on Hero Section
-    const heroContent = document.querySelector('.hero-content');
-    window.addEventListener('scroll', () => {
-        const scrolled = window.scrollY;
-        if (scrolled < 600 && heroContent) {
-            heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
-            heroContent.style.opacity = 1 - (scrolled / 500);
-        }
-    });
+
 
     // --- ANALYTICS EVENT TRACKING ---
     const trackEvent = (eventName, params = {}) => {
