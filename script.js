@@ -68,6 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     revealOnScroll();
 
+    // Navbar Background Blur Enhancements & Logo position
+    const navbar = document.querySelector('.navbar');
+
+    // Set initial state — shows the big hero logo on page load
+    if (window.scrollY <= 50) {
+        navbar.classList.add('at-top');
+    }
+
     // --- SINGLE THROTTLED SCROLL HANDLER (performance) ---
     const heroContent = document.querySelector('.hero-content');
     let scrollRAF = null;
