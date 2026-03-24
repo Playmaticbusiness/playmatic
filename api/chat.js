@@ -1,5 +1,5 @@
 // api/chat.js
-// Versión final ULTRA-COMPATIBLE para Netlify
+// Versión final ULTRA-COMPATIBLE para Netlify — Motor: Groq (Llama 3.3)
 
 export const handler = async (event, context) => {
     if (event.httpMethod !== 'POST') {
@@ -9,13 +9,13 @@ export const handler = async (event, context) => {
     try {
         const body = JSON.parse(event.body || '{}');
         const { message } = body;
-        const apiKey = process.env.GEMINI_API_KEY;
+        const apiKey = process.env.GROQ_API_KEY;
 
         if (!apiKey) {
             return {
                 statusCode: 500,
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ error: 'Falta la variable GEMINI_API_KEY en Netlify' })
+                body: JSON.stringify({ error: 'Falta la variable GROQ_API_KEY en Netlify' })
             };
         }
 
@@ -41,17 +41,20 @@ export const handler = async (event, context) => {
         - Respuestas cortas, directas y con emojis (🚀, 🤖, ⚡, 📈, ✨).
         `;
 
-        // Usamos la URL v1beta que es la que te pedía el error anterior,
-        // pero con un formato de JSON más simple para evitar fallos de campos.
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-
-        const response = await fetch(apiUrl, {
+        // Llamamos a la API de Groq (Llama 3.3 70B)
+        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`
+            },
             body: JSON.stringify({
-                contents: [{
-                    parts: [{ text: `${systemPrompt}\n\nPregunta del usuario: ${message}` }]
-                }]
+                model: 'llama-3.3-70b-versatile',
+                messages: [
+                    { role: 'system', content: systemPrompt },
+                    { role: 'user', content: message }
+                ],
+                temperature: 0.7
             })
         });
 
@@ -65,17 +68,17 @@ export const handler = async (event, context) => {
             };
         }
 
-        if (data.candidates && data.candidates[0].content.parts[0].text) {
+        if (data.choices && data.choices[0].message.content) {
             return {
                 statusCode: 200,
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ response: data.candidates[0].content.parts[0].text })
+                body: JSON.stringify({ response: data.choices[0].message.content })
             };
         } else {
             return {
                 statusCode: 500,
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ error: 'Respuesta inesperada de Google', details: JSON.stringify(data) })
+                body: JSON.stringify({ error: 'Respuesta inesperada de Groq', details: JSON.stringify(data) })
             };
         }
 
