@@ -1,0 +1,15 @@
+# Dependencias
+node_modules/
+.netlify/
+
+# Datos Privados (IMPORTANTE: No borrar)
+scripts/credentials.json
+.env
+
+# Reportes Locales
+reports/
+*.xlsx
+
+# Otros
+.DS_Store
+dist/

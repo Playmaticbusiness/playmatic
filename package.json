@@ -1,0 +1,14 @@
+{
+  "name": "playmatic-analytics",
+  "version": "1.0.0",
+  "description": "Herramienta local para generar reportes de Playmatic",
+  "main": "scripts/analytics-report.js",
+  "scripts": {
+    "report": "node scripts/analytics-report.js"
+  },
+  "dependencies": {
+    "@google-analytics/data": "^4.11.0",
+    "exceljs": "^4.4.0",
+    "googleapis": "^144.0.0"
+  }
+}

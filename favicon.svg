@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@800&amp;display=swap');
+      text {
+        font-family: 'Orbitron', system-ui, sans-serif;
+        font-size: 80px;
+        font-weight: 800;
+        fill: url(#grad);
+      }
+    </style>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#7e7e85" />
+    </linearGradient>
+  </defs>
+  <text x="50%" y="55%" dominant-baseline="central" text-anchor="middle">P</text>
+</svg>
