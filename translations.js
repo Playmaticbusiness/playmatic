@@ -16,7 +16,7 @@ const translations = {
         "marquee-4": "⏱️ Ahorro de Tiempo",
         "marquee-5": "🚀 Automatización 24/7",
         
-        "obj-title": "Nuestro Compromiso",
+        "obj-title": "Nuestro Objetivo",
         "obj-p1": "En Playmatic nacemos con una misión clara: <strong>acercar la atención al cliente de la empresa al propio cliente de forma inmediata.</strong>",
         "obj-p2": "Tras observar el ecosistema empresarial del sur, nos dimos cuenta de un patrón recurrente: <strong>muchos negocios excepcionales en Málaga y la Costa del Sol poseen una calidad de producto y servicio sobresaliente, pero no logran captar la cantidad de clientes necesaria para impulsar su crecimiento</strong> al máximo nivel debido a la falta de respuesta inmediata en sus canales digitales.",
         "obj-p3": "Nosotros somos el puente tecnológico que convierte ese interés latente en clientes reales, facturación y crecimiento local.",

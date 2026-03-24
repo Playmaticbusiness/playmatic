@@ -183,8 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- CHATBOT LOGIC ---
-    // API KEY INTEGRADA CON ÉXITO - MOTOR: GROQ (Llama 3.3 70B)
-    const GROQ_API_KEY = "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";
+    // El chatbot ahora usa la función segura de Netlify (/api/chat)
 
     const chatbotWidget = document.getElementById('chatbot-widget');
     const chatToggle = document.getElementById('chat-toggle');
@@ -338,62 +337,30 @@ document.addEventListener('DOMContentLoaded', () => {
         typingIndicator.classList.add('typing');
 
         try {
-            const systemPrompt = `
-            Eres PlayBot, el asistente inteligente de Playmatic, una agencia de automatización de redes sociales en Málaga.
-            Tu misión es ayudar a los negocios a captar leads de forma automática y profesional.
-            
-            INFORMACIÓN DE CONTACTO (Usa siempre estos enlaces cuando se te pida el contacto):
-            - Instagram: <a href="https://instagram.com/playmaticteam" target="_blank" class="ig-link">@playmaticteam</a>
-            - Email: <a href="mailto:playmaticbusiness@gmail.com" class="ig-link">playmaticbusiness@gmail.com</a>
-            - Calendly llamadas: <a href="https://calendly.com/playmaticbusiness/30min" target="_blank" class="ig-link">Reservar en Calendly</a>
-            - Web: <a href="https://playmatic.netlify.app/" target="_blank" class="ig-link">playmatic.netlify.app</a>
-            - Localización: Málaga, Costa del Sol.
-            
-            SERVICIOS Y PRECIOS:
-            - Básica: 49,99€ Setup (pago único) + 29,99€/mes. Incluye Chatbot, FAQs, bienvenida automática.
-            - Marketing: 79,99€ Setup (pago único) + 49,99€/mes. Incluye Todo lo anterior + Automatización de comentarios, captura de leads, embudos de venta. (Más popular 🔥).
-            *IMPORTANTE:* La mensualidad se cobra siempre a partir del primer día del mes siguiente a la contratación del setup por parte del cliente.
-            - Empresas / Agencias: Precio "A Consultar". Soluciones a medida e integraciones complejas para ecosistemas grandes.
-            
-            DIRECTRICES:
-            - **RESTRICCIÓN CRÍTICA:** No hables de NADA que no esté relacionado con Playmatic.
-            - **IDIOMA:** Eres completamente bilingüe. Respóndele al usuario fluidamente en su mismo idioma (ej. si te habla en inglés, responde todo en inglés perfecto nativo).
-            - Responde de forma corta, directa y profesional.
-            - Usa los enlaces HTML proporcionados al enviar la información de contacto.
-            - Usa emojis naturales, expresivos y variados para sonar humano y cercano, por ejemplo: 🚀, 🤖, ⚡, 📈, ✨, 💡, 🔥, 🙌, 💬, 😊, 👋, 🎯, 🤝, 👀, 💯, 📱, 💻, ⚙️, 🛠️, 🤓
-            `;
-
-            const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+            // Llamamos a nuestra propia API en Netlify para que la clave sea segura
+            const response = await fetch('/api/chat', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${GROQ_API_KEY}`
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    model: 'llama-3.3-70b-versatile',
-                    messages: [
-                        { role: 'system', content: systemPrompt },
-                        { role: 'user', content: text }
-                    ],
-                    temperature: 0.7
-                })
+                body: JSON.stringify({ message: text })
             });
 
             const data = await response.json();
             typingIndicator.remove();
 
-            if (data.choices && data.choices[0].message) {
-                appendMessage(data.choices[0].message.content, 'bot', true);
+            if (data.response) {
+                appendMessage(data.response, 'bot', true);
             } else if (data.error) {
-                console.error('Groq Error:', data.error);
-                appendMessage(`Lo siento, estoy teniendo un problema técnico. ¿Puedes repetirlo?`, 'bot');
+                console.error('Chat Error:', data.error);
+                appendMessage(`Lo siento, ha habido un error: ${data.error}`, 'bot');
             } else {
                 appendMessage('Lo siento, no he podido procesar tu respuesta.', 'bot');
             }
         } catch (error) {
             typingIndicator.remove();
             console.error('Error:', error);
-            appendMessage('Error de conexión. Por favor, revisa tu conexión a internet.', 'bot');
+            appendMessage('Error de conexión con el servidor.', 'bot');
         }
     };
 
