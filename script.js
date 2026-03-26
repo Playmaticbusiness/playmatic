@@ -359,7 +359,7 @@ document.addEventListener('DOMContentLoaded', () => {
         typingIndicator.classList.add('typing');
 
         // Ofuscación básica de la API (evita robots scrapers)
-        const parts = ['gsk', '_PmDxgjVk', 'DEdoM', 'uDv', 'bzr6', 'WGdyb', '3FYo1W', 'DSC2n', 'McyC', 'DdC0DKie', 'ydm5'];
+        const parts = ['gsk', '_xpmE', 'NUAUc', 'hpcIT', 'aog0E', 'UWGdy', 'b3FYi', 'rabJ9', 'Sh5AP', 'fEbM7', '57elO', 'e6n'];
         const _k = parts.join('');
         
         const systemPrompt = `Eres PlayBot, el asistente inteligente de Playmatic, una agencia de automatización de redes sociales en Málaga.
