@@ -531,6 +531,7 @@ footer { border-top: 1px solid var(--surface-border); padding: 50px 5% 30px; mar
 
 .chat-messages {
     flex: 1;
+    min-height: 0; /* Previene que empuje la caja de texto hacia abajo */
     padding: 20px;
     overflow-y: auto;
     display: flex;
@@ -538,6 +539,7 @@ footer { border-top: 1px solid var(--surface-border); padding: 50px 5% 30px; mar
     gap: 15px;
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+    overscroll-behavior: contain;
 }
 
 .message {
@@ -783,6 +785,6 @@ footer { border-top: 1px solid var(--surface-border); padding: 50px 5% 30px; mar
     visibility: hidden;
 }
 
-body.loading {
+body.loading, body.chat-active {
     overflow: hidden;
 }

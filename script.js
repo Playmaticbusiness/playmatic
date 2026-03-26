@@ -284,6 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Toggle Chat Window
     const toggleChat = () => {
         chatbotWidget.classList.toggle('active');
+        document.body.classList.toggle('chat-active', chatbotWidget.classList.contains('active'));
         if (chatTooltip) chatTooltip.classList.remove('show');
         if (chatbotWidget.classList.contains('active')) {
             chatInput.focus();
