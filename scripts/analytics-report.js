@@ -59,6 +59,9 @@ async function runReport() {
         // 3. Generar Excel local de respaldo
         await generateExcel(response);
 
+        // 4. Generar Dashboard HTML automático (0 setup requerido por el usuario)
+        await generateHTMLDashboard(response);
+
     } catch (error) {
         console.error('❌ Error en el proceso:', error.message);
     }
@@ -147,6 +150,227 @@ async function generateExcel(reportData) {
     const filePath = path.join(reportsDir, `backup_${new Date().toISOString().split('T')[0]}.xlsx`);
     await workbook.xlsx.writeFile(filePath);
     console.log(`💾 Backup local guardado en: ${filePath}`);
+}
+
+async function generateHTMLDashboard(reportData) {
+    const dateMap = {};
+    const deviceMap = {};
+    const sourceMap = {};
+    const cityMap = {};
+    const pageMap = {};
+    
+    let totalSessions = 0;
+    let totalPageViews = 0;
+    let sumEngagementRate = 0;
+    let sumDuration = 0;
+    let rowCount = 0;
+    
+    reportData.rows.forEach(row => {
+        const date = row.dimensionValues[0].value; 
+        const page = row.dimensionValues[1].value;
+        const source = row.dimensionValues[2].value;
+        const device = row.dimensionValues[3].value;
+        const city = row.dimensionValues[4].value;
+        
+        const sess = parseInt(row.metricValues[2].value) || 0;
+        const views = parseInt(row.metricValues[3].value) || 0;
+        const engage = parseFloat(row.metricValues[4].value) || 0;
+        const dur = parseFloat(row.metricValues[5].value) || 0;
+        
+        totalSessions += sess;
+        totalPageViews += views;
+        sumEngagementRate += engage;
+        sumDuration += dur;
+        rowCount++;
+        
+        if (!dateMap[date]) dateMap[date] = { sessions: 0, views: 0 };
+        dateMap[date].sessions += sess;
+        dateMap[date].views += views;
+
+        if (!deviceMap[device]) deviceMap[device] = 0;
+        deviceMap[device] += sess;
+
+        if (!sourceMap[source]) sourceMap[source] = 0;
+        sourceMap[source] += sess;
+
+        if (city !== '(not set)') {
+            if (!cityMap[city]) cityMap[city] = 0;
+            cityMap[city] += sess;
+        }
+
+        if (!pageMap[page]) pageMap[page] = 0;
+        pageMap[page] += views;
+    });
+
+    const avgEngagement = rowCount > 0 ? ((sumEngagementRate / rowCount) * 100).toFixed(1) + '%' : '0%';
+    const avgDur = rowCount > 0 ? (sumDuration / rowCount).toFixed(0) + 's' : '0s';
+
+    const sortedDates = Object.keys(dateMap).sort();
+    const labels = sortedDates.map(d => `${d.substring(6,8)}/${d.substring(4,6)}`);
+    const dataSessions = sortedDates.map(d => dateMap[d].sessions);
+    const dataViews = sortedDates.map(d => dateMap[d].views);
+
+    // Formatear dispositivo
+    const devDict = { 'mobile': 'Móvil', 'desktop': 'Ordenador', 'tablet': 'Tablet' };
+    const deviceLabels = Object.keys(deviceMap).map(d => devDict[d] || d);
+    const deviceData = Object.values(deviceMap);
+
+    const sourceLabels = Object.keys(sourceMap);
+    const sourceData = Object.values(sourceMap);
+
+    const topCities = Object.entries(cityMap).sort((a,b) => b[1] - a[1]).slice(0, 5);
+    const cityLabels = topCities.map(c => c[0]);
+    const cityData = topCities.map(c => c[1]);
+
+    const topPages = Object.entries(pageMap).sort((a,b) => b[1] - a[1]).slice(0, 5);
+    const pagesTableRows = topPages.map(p => `<div style="display:flex; justify-content:space-between; margin-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:5px;"><span>${p[0]}</span><span style="color:#00f2fe; font-weight:bold;">${p[1]}</span></div>`).join('');
+
+    const htmlContent = `<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Analítico Playmatic</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0d0d10; color: #f2f2f5; padding: 20px; margin:0; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { text-align: center; color: #4facfe; margin: 20px 0 40px; font-weight: 800; font-size: 2.2rem; }
+        .scorecards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .card { background: rgba(25, 25, 30, 0.8); padding: 25px 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
+        .card h3 { margin: 0 0 10px 0; color: #8a8d9b; font-size: 1rem; }
+        .card p { margin: 0; font-size: 2.2rem; font-weight: bold; color: #00f2fe; }
+        .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .chart-container { background: rgba(25, 25, 30, 0.8); padding: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
+        .full-width { grid-column: 1 / -1; }
+        h2.box-title { color:#8a8d9b; font-size:1.1rem; text-align:center; margin-top:0; margin-bottom:20px; }
+        .footer { text-align: center; margin-top: 40px; margin-bottom: 20px; color: #8a8d9b; font-size: 0.9rem; }
+        @media (max-width: 768px) { .charts-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Analíticas Playmatic</h1>
+        
+        <div class="scorecards">
+            <div class="card">
+                <h3>👀 Vistas de Página</h3>
+                <p>${totalPageViews}</p>
+            </div>
+            <div class="card">
+                <h3>🚪 Visitas (Sesiones)</h3>
+                <p>${totalSessions}</p>
+            </div>
+            <div class="card">
+                <h3>⏱️ Tiempo Medio</h3>
+                <p>${avgDur}</p>
+            </div>
+            <div class="card">
+                <h3>🔥 Engagement</h3>
+                <p>${avgEngagement}</p>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-container full-width">
+                <h2 class="box-title">Evolución del Tráfico</h2>
+                <canvas id="trafficChart"></canvas>
+            </div>
+            
+            <div class="chart-container">
+                <h2 class="box-title">Dispositivos Utilizados</h2>
+                <canvas id="deviceChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <h2 class="box-title">Orígenes del Tráfico</h2>
+                <canvas id="sourceChart"></canvas>
+            </div>
+            
+            <div class="chart-container">
+                <h2 class="box-title">Top Ciudades</h2>
+                <canvas id="cityChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <h2 class="box-title">Páginas Más Vistas</h2>
+                <div style="margin-top:20px;">
+                    ${pagesTableRows}
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            Generado automáticamente el ${new Date().toLocaleDateString('es-ES')} a las ${new Date().toLocaleTimeString('es-ES')}
+        </div>
+    </div>
+
+    <script>
+        Chart.defaults.color = '#8a8d9b';
+        Chart.defaults.borderColor = 'rgba(255,255,255,0.05)';
+
+        // Tráfico Evolutivo
+        new Chart(document.getElementById('trafficChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ${JSON.stringify(labels)},
+                datasets: [
+                    { label: 'Vistas de Página', data: ${JSON.stringify(dataViews)}, borderColor: '#00f2fe', backgroundColor: 'rgba(0, 242, 254, 0.1)', borderWidth: 3, tension: 0.4, fill: true },
+                    { label: 'Sesiones', data: ${JSON.stringify(dataSessions)}, borderColor: '#4facfe', backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, borderDash: [5, 5] }
+                ]
+            },
+            options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+        });
+
+        // Dispositivos (Doughnut)
+        new Chart(document.getElementById('deviceChart').getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: ${JSON.stringify(deviceLabels)},
+                datasets: [{
+                    data: ${JSON.stringify(deviceData)},
+                    backgroundColor: ['#00f2fe', '#4facfe', '#1a365d'],
+                    borderWidth: 0
+                }]
+            },
+            options: { responsive: true, cutout: '70%', plugins: { legend: { position: 'bottom' } } }
+        });
+
+        // Fuentes (Pie)
+        new Chart(document.getElementById('sourceChart').getContext('2d'), {
+            type: 'pie',
+            data: {
+                labels: ${JSON.stringify(sourceLabels)},
+                datasets: [{
+                    data: ${JSON.stringify(sourceData)},
+                    backgroundColor: ['#e11d48', '#2563eb', '#16a34a', '#d97706', '#9333ea'],
+                    borderWidth: 0
+                }]
+            },
+            options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+        });
+
+        // Ciudades (Bar)
+        new Chart(document.getElementById('cityChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ${JSON.stringify(cityLabels)},
+                datasets: [{
+                    label: 'Sesiones',
+                    data: ${JSON.stringify(cityData)},
+                    backgroundColor: '#00f2fe',
+                    borderRadius: 4
+                }]
+            },
+            options: { responsive: true, plugins: { legend: { display:false } } }
+        });
+    </script>
+</body>
+</html>`;
+
+    const rootPath = path.join(__dirname, '..', 'Dashboard_Analiticas.html');
+    fs.writeFileSync(rootPath, htmlContent);
+    console.log(`📊 Dashboard HTML generado automáticamente en: ${rootPath}`);
 }
 
 runReport();

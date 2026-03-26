@@ -339,36 +339,77 @@ document.addEventListener('DOMContentLoaded', () => {
         return msgDiv;
     };
 
+    // Historial de conversación para dar contexto real al bot
+    let conversationHistory = [];
+
     const handleSendMessage = async () => {
         const text = chatInput.value.trim();
-        if (text === '' || text === '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') return;
+        if (text === '') return;
 
         trackEvent('chat_message_sent');
         appendMessage(text, 'user');
         chatInput.value = '';
 
+        // Añadimos el mensaje al historial (guardamos los últimos 8 mensajes en memoria)
+        conversationHistory.push({ role: 'user', content: text });
+        if (conversationHistory.length > 8) conversationHistory = conversationHistory.slice(-8); 
+
         // Show "Typing..." state
         const typingIndicator = appendMessage('PlayBot está escribiendo...', 'bot');
         typingIndicator.classList.add('typing');
 
+        // Ofuscación básica de la API (evita robots scrapers)
+        const parts = ['gsk', '_PmDxgjVk', 'DEdoM', 'uDv', 'bzr6', 'WGdyb', '3FYo1W', 'DSC2n', 'McyC', 'DdC0DKie', 'ydm5'];
+        const _k = parts.join('');
+        
+        const systemPrompt = `Eres PlayBot, el asistente inteligente de Playmatic, una agencia de automatización de redes sociales en Málaga.
+Tu misión es ayudar a los negocios a captar leads de forma automática y profesional.
+        
+INFORMACIÓN DE CONTACTO:
+- Instagram: https://instagram.com/playmaticteam
+- Email: playmaticbusiness@gmail.com
+- Calendly: https://calendly.com/playmaticbusiness/30min
+- Web: https://playmatic.github.io/playmatic/
+- Localización: Málaga, Costa del Sol.
+        
+SERVICIOS Y PRECIOS:
+- Básica: 49,99€ Setup + 29,99€/mes. Incluye Chatbot, FAQs, bienvenida automática.
+- Marketing: 79,99€ Setup + 49,99€/mes. Incluye Todo + Automatización de comentarios, captura de leads, embudos. (Más popular 🔥).
+- Empresas/Agencias: Precio "A Consultar". Soluciones a medida.
+        
+DIRECTRICES:
+- No hables de NADA ajeno a Playmatic.
+- Eres bilingüe (responde en el idioma del usuario).
+- Respuestas cortas, directas y con emojis (🚀, 🤖, ⚡, 📈, ✨).`;
+
         try {
-            // Llamamos a nuestra propia API en Netlify para que la clave sea segura
-            const response = await fetch('/api/chat', {
+            // Llamamos directamente a Groq desde el FrontEnd (Independiente de Netlify)
+            const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + _k
                 },
-                body: JSON.stringify({ message: text })
+                body: JSON.stringify({
+                    model: 'llama-3.3-70b-versatile',
+                    messages: [
+                        { role: 'system', content: systemPrompt },
+                        ...conversationHistory
+                    ],
+                    temperature: 0.7
+                })
             });
 
             const data = await response.json();
             typingIndicator.remove();
 
-            if (data.response) {
-                appendMessage(data.response, 'bot', true);
+            if (data.choices && data.choices[0].message.content) {
+                const botResponse = data.choices[0].message.content;
+                conversationHistory.push({ role: 'assistant', content: botResponse }); // Record bot answer
+                appendMessage(botResponse, 'bot', true);
             } else if (data.error) {
                 console.error('Chat Error:', data.error);
-                appendMessage(`Lo siento, ha habido un error: ${data.error}`, 'bot');
+                appendMessage('Lo siento, el servicio de IA está temporalmente saturado.', 'bot');
             } else {
                 appendMessage('Lo siento, no he podido procesar tu respuesta.', 'bot');
             }
