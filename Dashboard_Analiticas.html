@@ -28,19 +28,19 @@
         <div class="scorecards">
             <div class="card">
                 <h3>👀 Vistas de Página</h3>
-                <p>37</p>
+                <p>73</p>
             </div>
             <div class="card">
                 <h3>🚪 Visitas (Sesiones)</h3>
-                <p>19</p>
+                <p>41</p>
             </div>
             <div class="card">
                 <h3>⏱️ Tiempo Medio</h3>
-                <p>255s</p>
+                <p>205s</p>
             </div>
             <div class="card">
                 <h3>🔥 Engagement</h3>
-                <p>56.3%</p>
+                <p>62.4%</p>
             </div>
         </div>
 
@@ -68,13 +68,13 @@
             <div class="chart-container">
                 <h2 class="box-title">Páginas Más Vistas</h2>
                 <div style="margin-top:20px;">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:5px;"><span>/</span><span style="color:#00f2fe; font-weight:bold;">37</span></div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:5px;"><span>/</span><span style="color:#00f2fe; font-weight:bold;">43</span></div><div style="display:flex; justify-content:space-between; margin-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:5px;"><span>/playmatic/</span><span style="color:#00f2fe; font-weight:bold;">30</span></div>
                 </div>
             </div>
         </div>
         
         <div class="footer">
-            Generado automáticamente el 26/3/2026 a las 21:13:01
+            Generado automáticamente el 28/3/2026 a las 19:47:03
         </div>
     </div>
 
@@ -86,10 +86,10 @@
         new Chart(document.getElementById('trafficChart').getContext('2d'), {
             type: 'line',
             data: {
-                labels: ["24/03","25/03","26/03"],
+                labels: ["24/03","25/03","26/03","27/03","28/03"],
                 datasets: [
-                    { label: 'Vistas de Página', data: [28,8,1], borderColor: '#00f2fe', backgroundColor: 'rgba(0, 242, 254, 0.1)', borderWidth: 3, tension: 0.4, fill: true },
-                    { label: 'Sesiones', data: [11,6,2], borderColor: '#4facfe', backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, borderDash: [5, 5] }
+                    { label: 'Vistas de Página', data: [28,8,25,10,2], borderColor: '#00f2fe', backgroundColor: 'rgba(0, 242, 254, 0.1)', borderWidth: 3, tension: 0.4, fill: true },
+                    { label: 'Sesiones', data: [11,6,14,8,2], borderColor: '#4facfe', backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, borderDash: [5, 5] }
                 ]
             },
             options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
@@ -101,7 +101,7 @@
             data: {
                 labels: ["Ordenador","Móvil"],
                 datasets: [{
-                    data: [9,10],
+                    data: [21,20],
                     backgroundColor: ['#00f2fe', '#4facfe', '#1a365d'],
                     borderWidth: 0
                 }]
@@ -113,9 +113,9 @@
         new Chart(document.getElementById('sourceChart').getContext('2d'), {
             type: 'pie',
             data: {
-                labels: ["(direct)","(not set)"],
+                labels: ["(direct)","github.com"],
                 datasets: [{
-                    data: [18,1],
+                    data: [40,1],
                     backgroundColor: ['#e11d48', '#2563eb', '#16a34a', '#d97706', '#9333ea'],
                     borderWidth: 0
                 }]
@@ -127,10 +127,10 @@
         new Chart(document.getElementById('cityChart').getContext('2d'), {
             type: 'bar',
             data: {
-                labels: ["Fuengirola","Malaga","Valencia"],
+                labels: ["Fuengirola","Malaga","San Jose","Bucharest","Valencia"],
                 datasets: [{
                     label: 'Sesiones',
-                    data: [10,6,1],
+                    data: [18,9,3,2,1],
                     backgroundColor: '#00f2fe',
                     borderRadius: 4
                 }]

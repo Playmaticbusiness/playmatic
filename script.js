@@ -434,6 +434,167 @@ DIRECTRICES:
         return '¡Gracias por tu mensaje! 🚀 Actualmente estoy en modo offline. Una vez que subas la web a Vercel/Netlify con tu API Key, podré responderte con inteligencia artificial avanzada.';
     };
 
+    // --- TYPING EFFECT HERO ---
+    const typingElement = document.getElementById('typing-text');
+    if (typingElement) {
+        const words = ['Clientes', 'Reservas', 'Ventas', 'Leads'];
+        let wordIndex = 0;
+        let charIndex = words[0].length; // start with 'Clientes' fully typed
+        let isDeleting = true; // wait and then delete
+
+        const typeEffect = () => {
+            const currentWord = words[wordIndex];
+            
+            if (isDeleting) {
+                typingElement.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            
+            let typeSpeed = isDeleting ? 40 : 100;
+            
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 2500; // Wait before deleting
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typeSpeed = 400; // Wait before typing new word
+            }
+            setTimeout(typeEffect, typeSpeed);
+        };
+        setTimeout(typeEffect, 2500); // initial wait
+    }
+
+    // --- QUIZ LOGIC ---
+    const quizContainer = document.getElementById('quiz-container');
+    if (quizContainer) {
+        let currentStep = 1;
+        const totalSteps = 4;
+        
+        const progressBar = document.getElementById('quiz-progress');
+        const options = document.querySelectorAll('.quiz-option');
+        
+        const inputs = {
+            1: document.getElementById('q1_canal_input'),
+            2: document.getElementById('q2_tiempo_input'),
+            3: document.getElementById('q3_repetitivo_input'),
+            4: document.getElementById('q4_seguidores_input')
+        };
+        
+        const updateProgress = () => {
+            const percent = ((currentStep - 1) / totalSteps) * 100;
+            if(progressBar) progressBar.style.width = percent + '%';
+        };
+        
+        options.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const value = e.target.getAttribute('data-value');
+                const stepDiv = e.target.closest('.quiz-step');
+                const stepNum = parseInt(stepDiv.getAttribute('data-step'));
+                
+                // save value
+                if(inputs[stepNum]) inputs[stepNum].value = value;
+                
+                // Active state on button
+                stepDiv.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected'));
+                e.target.classList.add('selected');
+                
+                // move to next
+                setTimeout(() => {
+                    stepDiv.classList.add('hidden');
+                    stepDiv.classList.remove('active');
+                    
+                    if (stepNum < totalSteps) {
+                        currentStep++;
+                        const nextStep = document.querySelector(`.quiz-step[data-step="${currentStep}"]`);
+                        nextStep.classList.remove('hidden');
+                        nextStep.classList.add('active');
+                        updateProgress();
+                    } else {
+                        // Finish quiz
+                        currentStep++;
+                        if(progressBar) progressBar.style.width = '100%';
+                        showLeadForm();
+                    }
+                }, 300);
+            });
+        });
+        
+        const showLeadForm = () => {
+            document.getElementById('quiz-questions-wrap').classList.add('hidden');
+            const leadForm = document.getElementById('quiz-lead-form');
+            leadForm.classList.remove('hidden');
+            
+            const anim = document.getElementById('quiz-calc-anim');
+            const finalWrap = document.getElementById('quiz-final-wrap');
+            
+            // simulate calculating
+            setTimeout(() => {
+                anim.classList.add('hidden');
+                finalWrap.classList.remove('hidden');
+            }, 2500);
+        };
+        
+        // Handle form submit slightly to redirect to calendly
+        const quizForm = document.getElementById('quiz-form');
+        if(quizForm) {
+            quizForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('quiz-submit-btn');
+                btn.textContent = 'Enviando...';
+                
+                const formData = new FormData(quizForm);
+                const object = Object.fromEntries(formData);
+                const json = JSON.stringify(object);
+                
+                try {
+                    // 1. Enviar el lead a Web3Forms (para que la agencia reciba los datos)
+                    await fetch('https://api.web3forms.com/submit', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: json
+                    }).catch(err => console.error("Error Web3Forms", err));
+
+                    // 2. Enviar email automático al usuario (Google Apps Script Webhook)
+                    const googleWebhookUrl = 'https://script.google.com/macros/s/AKfycbzr_7tU-w3QumDxJQxzKyqst2O3WR6BE94Vu0pi8TTbullvIVUpi0kPLeEbMTTMQVCE5g/exec'; 
+                    
+                    if (googleWebhookUrl.startsWith('http')) {
+                        // Enviamos como texto JSON ya que el Apps Script usa JSON.parse(e.postData.contents)
+                        await fetch(googleWebhookUrl, {
+                            method: 'POST',
+                            mode: 'no-cors',
+                            headers: {
+                                'Content-Type': 'text/plain'
+                            },
+                            body: json
+                        }).catch(err => console.error("Error Webhook JSON:", err));
+                    }
+                    
+                    // Show success message
+                    btn.textContent = '¡Informe enviado con éxito!';
+                    btn.style.background = '#2ed573';
+                    btn.style.color = '#111';
+                    btn.disabled = true;
+                    setTimeout(() => {
+                        finalWrap.innerHTML = `<h3>¡Revisa tu bandeja de entrada! 📬</h3><p>Acabamos de enviarte el diagnóstico personalizado al correo que nos has dejado. (Revisa la carpeta de spam por si acaso).</p><a href="https://calendly.com/playmaticbusiness/30min" class="btn-primary" style="margin-top: 20px;">Agendar llamada directa</a>`;
+                    }, 1500);
+
+                } catch(error) {
+                    btn.textContent = 'Error. Intenta de nuevo.';
+                    btn.style.background = '#ff4757';
+                }
+            });
+        }
+        
+        updateProgress();
+    }
+
     sendBtn.addEventListener('click', handleSendMessage);
     chatInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') handleSendMessage();
