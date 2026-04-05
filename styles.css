@@ -427,47 +427,6 @@ footer { border-top: 1px solid var(--surface-border); padding: 50px 5% 30px; mar
 
 @media (max-width: 768px) {
     .logo-img { max-width: 80vw; }
-    
-    /* Ultimate solution for zero-wobble and perfect mathematical centering: 
-       A full-width container that uses text-align. We disable left/translate horizontal animations 
-       to prevent matrix interpolation wobble entirely, resulting in fluid vertical/font scaling 
-       coupled with an instant horizontal orientation snap that respects constraints flawlessly. */
-    /* Ultimate solution for zero-wobble and perfect mathematical centering: 
-       A full-width container that uses text-align. We disable left/translate horizontal animations 
-       to prevent matrix interpolation wobble entirely. */
-    .navbar .logo {
-        left: 0 !important;
-        width: 100% !important;
-        text-align: left;
-        padding: 0 5% !important;
-        margin: 0 !important;
-        transform: translateY(-50%) !important;
-        box-sizing: border-box;
-        transition: font-size 0.4s ease, top 0.4s ease !important;
-        pointer-events: none;
-        z-index: 10;
-        display: block !important;
-    }
-    
-    .navbar .logo a {
-        pointer-events: auto;
-    }
-    
-    /* Extra specificity to override desktop at-top rules */
-    .navbar.at-top .logo {
-        top: 120px !important;
-        left: 0 !important;
-        width: 100% !important;
-        text-align: center !important;
-        padding: 0 15px !important;
-        margin: 0 !important;
-        transform: translateY(-50%) !important;
-        font-size: 7.5vw !important; /* Safe size for all mobile devices */
-        letter-spacing: 2px !important; /* Tighter for mobile to prevent overflow */
-        background: none;
-        -webkit-text-fill-color: var(--text-primary);
-        color: var(--text-primary);
-    }
     .hero { padding-top: 210px; padding-bottom: 30px; }
     .nav-links, .btn-cta-nav { display: none; }
     .nav-actions { gap: 10px; }
@@ -1001,4 +960,34 @@ body.loading, body.chat-active {
     border: none;
     font-size: 1.1rem;
     padding: 15px 30px;
+}
+
+/* FINAL MOBILE OVERRIDES - RELOCATED TO BOTTOM FOR ABSOLUTE SPECIFICITY */
+@media (max-width: 768px) {
+    /* Base logo reset for mobile */
+    .navbar .logo {
+        top: 50% !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        text-align: left !important;
+        padding: 0 5% !important;
+        margin: 0 !important;
+        transform: translateY(-50%) !important;
+        transition: all 0.4s ease !important;
+    }
+
+    /* Centered logo when at top of page on mobile */
+    .navbar.at-top .logo {
+        top: 120px !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        text-align: center !important;
+        padding: 0 15px !important;
+        margin: 0 !important;
+        transform: translateY(-50%) !important;
+        font-size: 7vw !important; /* Conservative size to ensure zero overflow */
+        letter-spacing: 2px !important;
+    }
 }
