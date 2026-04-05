@@ -954,15 +954,18 @@ body.loading, body.chat-active {
         align-items: center !important;
         justify-content: space-between !important;
         background: rgba(13, 13, 16, 0.95) !important;
+        /* Adding delay to background for a "late fade" effect to eliminate the black block feel */
         transition: height 0.7s cubic-bezier(0.25, 1, 0.3, 1), 
-                    background 0.5s ease !important;
+                    background 0.5s ease 0.2s !important;
     }
 
     /* Entrance State: Expanded navbar height drives the logo down */
     .navbar.at-top {
-        height: 280px !important;
+        height: 210px !important;
         background: transparent !important;
         border-bottom-color: transparent !important;
+        transition: height 0.7s cubic-bezier(0.25, 1, 0.3, 1), 
+                    background 0.3s ease !important;
     }
 
     /* Fixed Language Selector: Remains in banner position regardless of navbar expansion */
@@ -1023,7 +1026,7 @@ body.loading, body.chat-active {
 
     /* Component Stabilizers */
     .logo-img { max-width: 80vw; }
-    .hero { padding-top: 280px; padding-bottom: 30px; }
+    .hero { padding-top: 170px; padding-bottom: 30px; }
     .nav-links, .btn-cta-nav { display: none; }
     .hero h1 { font-size: 2.2rem; min-height: 4.5em; }
     .hero p { font-size: 1rem; }
