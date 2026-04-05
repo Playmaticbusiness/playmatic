@@ -61,9 +61,9 @@ a { text-decoration: none; color: inherit; }
 @keyframes sweep { 0% { left: -50%; } 100% { left: 150%; } }
 
 .navbar {
-    position: fixed; top: 0; width: 100%; padding: 20px 5%; display: flex; justify-content: space-between;
-    align-items: center; z-index: 1000; background: rgba(13, 13, 16, 0.8); backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--surface-border); transition: all 0.3s ease;
+    position: fixed; top: 0; width: 100%; padding: 15px 5%; display: flex; justify-content: space-between;
+    align-items: center; z-index: 1000; background: rgba(13, 13, 16, 0.95); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--surface-border); transition: all 0.5s cubic-bezier(0.25, 1, 0.3, 1);
     will-change: background, padding;
 }
 .navbar::before {
@@ -73,6 +73,8 @@ a { text-decoration: none; color: inherit; }
     height: 30px;
 }
 .navbar.at-top {
+    background: transparent;
+    padding: 20px 5%;
     border-bottom-color: transparent;
     box-shadow: none;
 }
@@ -81,7 +83,7 @@ a { text-decoration: none; color: inherit; }
     left: 5%;
     top: 50%;
     transform: translateY(-50%);
-    transition: all 0.7s cubic-bezier(0.25, 1, 0.3, 1);
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.3, 1);
     will-change: transform, top, left;
     white-space: nowrap;
     z-index: 1001;
@@ -964,7 +966,7 @@ body.loading, body.chat-active {
 
 /* FINAL MOBILE OVERRIDES - RELOCATED TO BOTTOM FOR ABSOLUTE SPECIFICITY */
 @media (max-width: 768px) {
-    /* Fluid coordinate-based transition for zero-wobble and desktop-level smoothness */
+    /* Unified, single-movement fluid transition for mobile logo */
     .navbar .logo {
         position: absolute !important;
         top: 50% !important;
@@ -973,22 +975,24 @@ body.loading, body.chat-active {
         text-align: left !important;
         padding: 0 !important;
         margin: 0 !important;
+        /* Using translate(0, -50%) as the base state */
         transform: translate(0, -50%) !important;
         font-size: 1.8rem !important;
-        letter-spacing: 5px !important;
-        transition: all 0.7s cubic-bezier(0.25, 1, 0.3, 1) !important;
+        letter-spacing: 4px !important;
+        /* Syncing transition timing with the navbar itself for a solid feel */
+        transition: all 0.5s cubic-bezier(0.25, 1, 0.3, 1) !important;
         display: block !important;
         z-index: 1001 !important;
     }
 
-    /* Centered larger logo at the top - matching desktop animation logic but for mobile */
+    /* Elegant, centered entrance state - strictly one movement path */
     .navbar.at-top .logo {
         top: 130px !important;
         left: 50% !important;
-        /* Using translate(-50%, -50%) to center and calc for letter-spacing offset */
+        /* Absolute centering with manual offset for letter-spacing (2px) */
         transform: translate(calc(-50% + 2px), -50%) !important;
-        font-size: 9.5vw !important; /* Premium large size for entrance */
-        letter-spacing: 5px !important;
+        font-size: 9.5vw !important;
+        letter-spacing: 4px !important;
         background: none !important;
         -webkit-text-fill-color: var(--text-primary) !important;
         color: var(--text-primary) !important;

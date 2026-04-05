@@ -89,16 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // 1. Reveal animations
             revealOnScroll();
 
-            // 2. Navbar background
-            if (scrolled > 50) {
-                navbar.style.background = 'rgba(13, 13, 16, 0.95)';
-                navbar.style.padding = '15px 5%';
-                navbar.classList.remove('at-top');
-            } else {
-                navbar.style.background = 'transparent';
-                navbar.style.padding = '20px 5%';
-                navbar.classList.add('at-top');
-            }
+            // 2. Navbar States
+            navbar.classList.toggle('scrolled', scrolled > 50);
+            navbar.classList.toggle('at-top', scrolled <= 50);
 
             // 3. Parallax (only in hero range, cheap check first)
             if (scrolled < 600 && heroContent) {
