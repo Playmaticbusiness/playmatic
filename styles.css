@@ -427,7 +427,7 @@ footer { border-top: 1px solid var(--surface-border); padding: 50px 5% 30px; mar
         top: 120px;
         left: 50% !important;
         transform: translate(-50%, -50%);
-        font-size: 8vw; /* Fixed to prevent horizontal overflow */
+        font-size: 9.5vw; /* Slightly larger, still no overflow */
         background: none;
         -webkit-text-fill-color: var(--text-primary);
         color: var(--text-primary);

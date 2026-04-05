@@ -435,38 +435,47 @@ DIRECTRICES:
     };
 
     // --- TYPING EFFECT HERO ---
-    const typingElement = document.getElementById('typing-text');
-    if (typingElement) {
-        const words = ['Clientes', 'Reservas', 'Ventas', 'Leads'];
-        let wordIndex = 0;
-        let charIndex = words[0].length; // start with 'Clientes' fully typed
-        let isDeleting = true; // wait and then delete
+    let wordIndex = 0;
+    let charIndex = 8; // Start matching 'Clientes'
+    let isDeleting = true; // wait and then delete
 
-        const typeEffect = () => {
-            const currentWord = words[wordIndex];
-            
-            if (isDeleting) {
-                typingElement.textContent = currentWord.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typingElement.textContent = currentWord.substring(0, charIndex + 1);
-                charIndex++;
-            }
-            
-            let typeSpeed = isDeleting ? 40 : 100;
-            
-            if (!isDeleting && charIndex === currentWord.length) {
-                typeSpeed = 2500; // Wait before deleting
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                wordIndex = (wordIndex + 1) % words.length;
-                typeSpeed = 400; // Wait before typing new word
-            }
-            setTimeout(typeEffect, typeSpeed);
-        };
-        setTimeout(typeEffect, 2500); // initial wait
-    }
+    const typeEffect = () => {
+        const typingElement = document.getElementById('typing-text');
+        if (!typingElement) {
+            setTimeout(typeEffect, 100);
+            return;
+        }
+
+        const isEnglish = document.documentElement.lang === 'en';
+        const words = isEnglish ? ['Clients', 'Bookings', 'Sales', 'Leads'] : ['Clientes', 'Reservas', 'Ventas', 'Leads'];
+        
+        // Prevent charIndex out of bounds when switching languages
+        if (wordIndex >= words.length) wordIndex = 0;
+        const currentWord = words[wordIndex];
+        if (charIndex > currentWord.length && !isDeleting) charIndex = currentWord.length;
+
+        if (isDeleting) {
+            typingElement.textContent = currentWord.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            typingElement.textContent = currentWord.substring(0, charIndex + 1);
+            charIndex++;
+        }
+        
+        let typeSpeed = isDeleting ? 40 : 100;
+        
+        if (!isDeleting && charIndex === currentWord.length) {
+            typeSpeed = 2500; // Wait before deleting
+            isDeleting = true;
+        } else if (isDeleting && charIndex <= 0) {
+            isDeleting = false;
+            charIndex = 0;
+            wordIndex = (wordIndex + 1) % words.length;
+            typeSpeed = 400; // Wait before typing new word
+        }
+        setTimeout(typeEffect, typeSpeed);
+    };
+    setTimeout(typeEffect, 2500); // initial wait
 
     // --- QUIZ LOGIC ---
     const quizContainer = document.getElementById('quiz-container');
