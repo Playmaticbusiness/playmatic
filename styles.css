@@ -953,8 +953,11 @@ body.loading, body.chat-active {
         display: flex !important;
         align-items: center !important;
         justify-content: space-between !important;
-        background: rgba(13, 13, 16, 0.95) !important;
-        /* Adding delay to background for a "late fade" effect to eliminate the black block feel */
+        background: #0d0d10 !important; /* Solid deep black for maximum contrast */
+        backdrop-filter: none !important; /* Eliminate "grey fog" blur on mobile browsers */
+        border-bottom: none !important; /* Perfect seamless blending */
+        box-shadow: none !important;
+        /* Late background fade for premium transition */
         transition: height 0.7s cubic-bezier(0.25, 1, 0.3, 1), 
                     background 0.5s ease 0.2s !important;
     }
@@ -964,6 +967,7 @@ body.loading, body.chat-active {
         height: 210px !important;
         background: transparent !important;
         border-bottom-color: transparent !important;
+        backdrop-filter: none !important;
         transition: height 0.7s cubic-bezier(0.25, 1, 0.3, 1), 
                     background 0.3s ease !important;
     }
@@ -1026,7 +1030,7 @@ body.loading, body.chat-active {
 
     /* Component Stabilizers */
     .logo-img { max-width: 80vw; }
-    .hero { padding-top: 170px; padding-bottom: 30px; }
+    .hero { padding-top: 185px; padding-bottom: 30px; }
     .nav-links, .btn-cta-nav { display: none; }
     .hero h1 { font-size: 2.2rem; min-height: 4.5em; }
     .hero p { font-size: 1rem; }
