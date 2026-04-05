@@ -424,16 +424,18 @@ footer { border-top: 1px solid var(--surface-border); padding: 50px 5% 30px; mar
 @media (max-width: 768px) {
     .logo-img { max-width: 80vw; }
     
-    /* Force logo to always stay centered horizontally on mobile */
+    /* Ensure the logo aligns left in both states, eliminating all horizontal wobble/jump when animating font-size and preventing overlap with language buttons */
     .navbar .logo {
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important;
+        left: 5% !important;
+        transform: translateY(-50%) !important;
     }
     
     .navbar.at-top .logo {
         top: 120px;
-        font-size: 11vw; /* Visibly larger */
-        padding-left: 5px; /* Offset the 5px letter-spacing so it is truly centered */
+        left: 5% !important;
+        transform: translateY(-50%) !important;
+        font-size: 11vw; /* Visibly larger, aligned cleanly */
+        padding-left: 0; 
         background: none;
         -webkit-text-fill-color: var(--text-primary);
         color: var(--text-primary);
