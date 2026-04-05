@@ -452,8 +452,9 @@ footer { border-top: 1px solid var(--surface-border); padding: 50px 5% 30px; mar
     .navbar.at-top .logo {
         top: 120px;
         text-align: center;
-        padding-left: 9px; /* Refined offset for mathematical center with letter-spacing */
-        font-size: 11vw; 
+        padding-left: 4px; /* Reduced offset to prevent right-clipping */
+        font-size: 8.5vw; /* Reduced from 11vw to fit 320px screens */
+        letter-spacing: 4px; /* Slightly tighter for mobile header */
         background: none;
         -webkit-text-fill-color: var(--text-primary);
         color: var(--text-primary);
