@@ -93,19 +93,27 @@ a { text-decoration: none; color: inherit; }
     display: block;
 }
 .navbar.at-top .logo {
-    top: 180px;
+    top: 150px;
     left: 50% !important;
-    transform: translate(-50%, -50%) scale(5);
+    transform: translate(-50%, -50%);
+    font-size: 6vw; /* Optimized for desktop */
+    background: none;
+    -webkit-text-fill-color: var(--text-primary);
+    color: var(--text-primary);
 }
 @media (max-width: 900px) {
     .navbar.at-top .logo {
-        top: 140px;
+        top: 130px;
         left: 50% !important;
-        transform: translate(-50%, -50%) scale(5);
+        transform: translate(-50%, -50%);
+        font-size: 10vw; /* Optimized for tablet */
+        background: none;
+        -webkit-text-fill-color: var(--text-primary);
+        color: var(--text-primary);
     }
-    .hero { padding-top: 220px; }
+    .hero { padding-top: 260px; }
 }
-.logo { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 800; letter-spacing: 2px; background: var(--gradient-1); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.logo { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 800; letter-spacing: 5px; background: var(--gradient-1); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .logo a { font-family: 'Orbitron', sans-serif; }
 
 .navbar .slogan-nav {
@@ -142,8 +150,8 @@ a { text-decoration: none; color: inherit; }
 .btn-cta-nav { padding: 10px 20px; border: 1px solid rgba(255,255,255,0.2); font-size: 0.9rem; }
 .btn-cta-nav:hover { background: var(--text-primary); color: var(--bg-color); }
 
-.hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding-top: 200px; }
-.hero-content { max-width: 800px; padding: 0 20px; }
+.hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding-top: 260px; }
+.hero-content { max-width: 800px; padding: 0 20px; z-index: 2; position: relative; }
 .hero h1 { font-size: 4.8rem; line-height: 1.1; margin-bottom: 30px; font-weight: 800; letter-spacing: -1.5px; min-height: 3.6em; text-align: center; display: block; }
 .hero p { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 40px; font-weight: 400; line-height: 1.6; }
 .location-highlight { display: inline-block; padding: 2px 8px; border-radius: 6px; background: rgba(0, 149, 246, 0.15); color: #4DA2FF; font-weight: 600; border: 1px solid rgba(0, 149, 246, 0.3); margin: 0 4px; }
@@ -418,9 +426,13 @@ footer { border-top: 1px solid var(--surface-border); padding: 50px 5% 30px; mar
     .navbar.at-top .logo {
         top: 120px;
         left: 50% !important;
-        transform: translate(-50%, -50%) scale(3.5);
+        transform: translate(-50%, -50%);
+        font-size: 12vw; /* Optimized for mobile */
+        background: none;
+        -webkit-text-fill-color: var(--text-primary);
+        color: var(--text-primary);
     }
-    .hero { padding-top: 140px; padding-bottom: 30px; }
+    .hero { padding-top: 210px; padding-bottom: 30px; }
     .nav-links, .btn-cta-nav { display: none; }
     .nav-actions { gap: 10px; }
     .navbar.at-top .lang-selector { opacity: 0; pointer-events: none; transform: translateY(-10px); }
