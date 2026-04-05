@@ -427,29 +427,9 @@ footer { border-top: 1px solid var(--surface-border); padding: 50px 5% 30px; mar
 .reveal.fade-right { transform: translateX(-60px); }
 .reveal.flip-up { transform: perspective(800px) rotateX(25deg) translateY(20px); }
 
-@media (max-width: 768px) {
-    .logo-img { max-width: 80vw; }
-    .hero { padding-top: 210px; padding-bottom: 30px; }
-    .nav-links, .btn-cta-nav { display: none; }
-    .nav-actions { gap: 10px; }
-    .navbar.at-top .lang-selector { opacity: 0; pointer-events: none; transform: translateY(-10px); }
-    .navbar { padding: 15px 5%; }
-    .hero h1 { font-size: 2.2rem; min-height: 4.5em; }
-    .hero p { font-size: 1rem; }
-    .hero-actions { flex-direction: column; width: 100%; }
-    .hero-actions a { width: 100%; }
-    .section-title { font-size: 2rem; }
-    .giant-logo { font-size: 2.2rem; }
-    
-    .footer-socials { flex-direction: column; gap: 15px; align-items: center; }
-    .social-link { font-size: 0.85rem; }
-    
-    .bottom-reveal-container { height: 250px; }
-    .reveal-spacer { height: 250px; }
-    
     .ig-chat-area { height: 600px; padding-bottom: 110px; }
     .demo-meta-fixed { top: 10px; }
-}
+
 
 /* --- CHATBOT WIDGET --- */
 .chatbot-widget {
@@ -964,18 +944,22 @@ body.loading, body.chat-active {
     padding: 15px 30px;
 }
 
-/* FINAL MOBILE OVERRIDES - RELOCATED TO BOTTOM FOR ABSOLUTE SPECIFICITY */
+/* MASTER MOBILE OVERRIDES - CONSOLIDATED AT BOTTOM TO ELIMINATE REDUNDANCY */
 @media (max-width: 768px) {
-    /* Stabilize navbar height on mobile to prevent layout shift during logo transition */
+    /* Navbar Core: Locked height to prevent vertical jitter during scroll */
     .navbar {
         padding: 20px 5% !important;
         transition: background 0.5s ease-out !important;
     }
+    .navbar.at-top {
+        background: transparent !important;
+        padding: 20px 5% !important; /* Identical padding for zero-resize */
+    }
 
-    /* Unified, single-movement fluid transition for mobile logo */
+    /* Master Logo Logic: Fluid transition using coordinate-based system */
     .navbar .logo {
         position: absolute !important;
-        top: 32px !important; /* Fixed pixel value to prevent percentage recalculation */
+        top: 32px !important; /* Fixed central pixel for the banner */
         left: 5% !important;
         width: auto !important;
         text-align: left !important;
@@ -984,24 +968,37 @@ body.loading, body.chat-active {
         transform: translate(0, -50%) !important;
         font-size: 1.8rem !important;
         letter-spacing: 4px !important;
-        /* Explicit property transitions for perfect fluidity */
+        /* Strictly synced transition for all properties */
         transition: transform 0.5s cubic-bezier(0.25, 1, 0.3, 1), 
                     left 0.5s cubic-bezier(0.25, 1, 0.3, 1), 
                     top 0.5s cubic-bezier(0.25, 1, 0.3, 1),
                     font-size 0.5s cubic-bezier(0.25, 1, 0.3, 1) !important;
         display: block !important;
-        z-index: 1001 !important;
     }
 
-    /* Elegant, centered entrance state - strictly one movement path */
+    /* Logo - Entrance State */
     .navbar.at-top .logo {
         top: 130px !important;
         left: 50% !important;
-        transform: translate(calc(-50% + 2px), -50%) !important;
+        transform: translate(calc(-50% + 2px), -50%) !important; /* Precision centering */
         font-size: 9.5vw !important;
         letter-spacing: 4px !important;
-        background: none !important;
-        -webkit-text-fill-color: var(--text-primary) !important;
-        color: var(--text-primary) !important;
     }
+
+    /* Layout & Component Overrides */
+    .logo-img { max-width: 80vw; }
+    .hero { padding-top: 210px; padding-bottom: 30px; }
+    .nav-links, .btn-cta-nav { display: none; }
+    .nav-actions { gap: 10px; }
+    .navbar.at-top .lang-selector { opacity: 0; pointer-events: none; transform: translateY(-10px); }
+    .hero h1 { font-size: 2.2rem; min-height: 4.5em; }
+    .hero p { font-size: 1rem; }
+    .hero-actions { flex-direction: column; width: 100%; }
+    .hero-actions a { width: 100%; }
+    .section-title { font-size: 2rem; }
+    
+    .footer-socials { flex-direction: column; gap: 15px; align-items: center; }
+    .bottom-reveal-container { height: 250px; }
+    .reveal-spacer { height: 250px; }
+    .giant-logo { font-size: 2.2rem; }
 }
