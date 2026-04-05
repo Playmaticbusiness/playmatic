@@ -424,17 +424,20 @@ footer { border-top: 1px solid var(--surface-border); padding: 50px 5% 30px; mar
 @media (max-width: 768px) {
     .logo-img { max-width: 80vw; }
     
-    /* Ensure the logo aligns left in both states, eliminating all horizontal wobble/jump when animating font-size and preventing overlap with language buttons */
+    /* Perfect linear transition layout: uses purely container-relative units (%, vw) to avoid the transform width quadratic wobble, flawlessly maintaining a straight diagonal line. */
     .navbar .logo {
         left: 5% !important;
+        margin-left: 0 !important;
         transform: translateY(-50%) !important;
+        z-index: 10;
     }
     
     .navbar.at-top .logo {
         top: 120px;
-        left: 5% !important;
+        left: 50% !important;
+        margin-left: -33vw !important; /* Absolute visual center approximation (PLAYMATIC length) */
         transform: translateY(-50%) !important;
-        font-size: 11vw; /* Visibly larger, aligned cleanly */
+        font-size: 11vw; 
         padding-left: 0; 
         background: none;
         -webkit-text-fill-color: var(--text-primary);
