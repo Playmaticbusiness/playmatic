@@ -122,7 +122,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const originalText = btn.textContent;
 
             // Estado de carga
-            btn.textContent = 'Enviando...';
+            const lang = document.documentElement.lang || 'es';
+            btn.textContent = translations[lang]['form-sending'];
             btn.style.opacity = '0.7';
             btn.style.pointerEvents = 'none';
 
@@ -141,16 +142,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 if (response.status === 200) {
-                    btn.textContent = '¡Enviado con éxito!';
+                    btn.textContent = translations[lang]['form-sent'];
                     btn.style.background = '#4CAF50';
                     btn.style.color = 'white';
                     form.reset();
                 } else {
-                    btn.textContent = 'Error al enviar';
+                    btn.textContent = translations[lang]['form-err'];
                     btn.style.background = '#f44336';
                 }
             } catch (error) {
-                btn.textContent = 'Error de conexión';
+                btn.textContent = translations[lang]['form-err-conn'];
                 btn.style.background = '#f44336';
             } finally {
                 btn.style.opacity = '1';
@@ -355,7 +356,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (conversationHistory.length > 8) conversationHistory = conversationHistory.slice(-8); 
 
         // Show "Typing..." state
-        const typingIndicator = appendMessage('PlayBot está escribiendo...', 'bot');
+        const lang = document.documentElement.lang || 'es';
+        const typingIndicator = appendMessage(translations[lang]['chat-typing'], 'bot');
         typingIndicator.classList.add('typing');
 
         // Ofuscación básica de la API (evita robots scrapers)
@@ -409,29 +411,30 @@ DIRECTRICES:
                 appendMessage(botResponse, 'bot', true);
             } else if (data.error) {
                 console.error('Chat Error:', data.error);
-                appendMessage('Lo siento, el servicio de IA está temporalmente saturado.', 'bot');
+                appendMessage(translations[lang]['chat-err-sat'], 'bot');
             } else {
-                appendMessage('Lo siento, no he podido procesar tu respuesta.', 'bot');
+                appendMessage(translations[lang]['chat-err-proc'], 'bot');
             }
         } catch (error) {
             typingIndicator.remove();
             console.error('Error:', error);
-            appendMessage('Error de conexión con el servidor.', 'bot');
+            appendMessage(translations[lang]['chat-err-conn'], 'bot');
         }
     };
 
     const getMockResponse = (input) => {
         const query = input.toLowerCase();
-        if (query.includes('precio') || query.includes('coste') || query.includes('cuanto vale')) {
-            return 'Nuestros planes empiezan desde 49,99€ de setup inicial y una cuota mensual de solo 29,99€ para la implementación básica. ¿Te gustaría ver el detalle de los servicios?';
+        const lang = document.documentElement.lang || 'es';
+        if (query.includes('precio') || query.includes('coste') || query.includes('cuanto vale') || query.includes('price')) {
+            return translations[lang]['mock-price'];
         }
-        if (query.includes('servicio') || query.includes('haces') || query.includes('ofreces')) {
-            return 'Ofrecemos automatización de DMs, chatbots inteligentes, captura de leads y embudos de venta en redes sociales. ¡Todo para que no pierdas ni un cliente!';
+        if (query.includes('servicio') || query.includes('haces') || query.includes('ofreces') || query.includes('services')) {
+            return translations[lang]['mock-serv'];
         }
-        if (query.includes('contacto') || query.includes('hablar') || query.includes('llamada')) {
-            return 'Puedes agendar una llamada directamente desde el botón de "Agendar Llamada" en la sección de contacto, o dejarme tus datos por aquí.';
+        if (query.includes('contacto') || query.includes('hablar') || query.includes('llamada') || query.includes('contact')) {
+            return translations[lang]['mock-contact'];
         }
-        return '¡Gracias por tu mensaje! 🚀 Actualmente estoy en modo offline. Una vez que subas la web a Vercel/Netlify con tu API Key, podré responderte con inteligencia artificial avanzada.';
+        return translations[lang]['mock-offline'];
     };
 
     // --- TYPING EFFECT HERO ---
@@ -552,8 +555,9 @@ DIRECTRICES:
         if(quizForm) {
             quizForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
+                const lang = document.documentElement.lang || 'es';
                 const btn = document.getElementById('quiz-submit-btn');
-                btn.textContent = 'Enviando...';
+                btn.textContent = translations[lang]['form-sending'];
                 
                 const formData = new FormData(quizForm);
                 const object = Object.fromEntries(formData);
@@ -586,16 +590,16 @@ DIRECTRICES:
                     }
                     
                     // Show success message
-                    btn.textContent = '¡Informe enviado con éxito!';
+                    btn.textContent = translations[lang]['quiz-sent'];
                     btn.style.background = '#2ed573';
                     btn.style.color = '#111';
                     btn.disabled = true;
                     setTimeout(() => {
-                        finalWrap.innerHTML = `<h3>¡Revisa tu bandeja de entrada! 📬</h3><p>Acabamos de enviarte el diagnóstico personalizado al correo que nos has dejado. (Revisa la carpeta de spam por si acaso).</p><a href="https://calendly.com/playmaticbusiness/30min" class="btn-primary" style="margin-top: 20px;">Agendar llamada directa</a>`;
+                        finalWrap.innerHTML = translations[lang]['quiz-success-msg'];
                     }, 1500);
 
                 } catch(error) {
-                    btn.textContent = 'Error. Intenta de nuevo.';
+                    btn.textContent = translations[lang]['quiz-err'];
                     btn.style.background = '#ff4757';
                 }
             });

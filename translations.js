@@ -146,7 +146,22 @@ const translations = {
         "slogan": "Tecnología, dinamismo y resultados",
         "chat-tt": "Hola 👋 Soy Playbot y estoy aquí para ayudarte.",
         "chat-welc": "¡Hola! 👋 Soy PlayBot, tu asistente de Playmatic. ¿En qué puedo ayudarte hoy?",
-        "chat-in": "Escribe un mensaje..."
+        "chat-in": "Escribe un mensaje...",
+        "chat-typing": "PlayBot está escribiendo...",
+        "chat-err-sat": "Lo siento, el servicio de IA está temporalmente saturado.",
+        "chat-err-proc": "Lo siento, no he podido procesar tu respuesta.",
+        "chat-err-conn": "Error de conexión con el servidor.",
+        "form-sending": "Enviando...",
+        "form-sent": "¡Enviado con éxito!",
+        "form-err": "Error al enviar",
+        "form-err-conn": "Error de conexión",
+        "quiz-sent": "¡Informe enviado con éxito!",
+        "quiz-err": "Error. Intenta de nuevo.",
+        "quiz-success-msg": "<h3>¡Revisa tu bandeja de entrada! 📬</h3><p>Acabamos de enviarte el diagnóstico personalizado al correo que nos has dejado. (Revisa la carpeta de spam por si acaso).</p><a href=\"https://calendly.com/playmaticbusiness/30min\" class=\"btn-primary\" style=\"margin-top: 20px;\">Agendar llamada directa</a>",
+        "mock-price": "Nuestros planes empiezan desde 49,99€ de setup inicial y una cuota mensual de solo 29,99€ para la implementación básica. ¿Te gustaría ver el detalle de los servicios?",
+        "mock-serv": "Ofrecemos automatización de DMs, chatbots inteligentes, captura de leads y embudos de venta en redes sociales. ¡Todo para que no pierdas ni un cliente!",
+        "mock-contact": "Puedes agendar una llamada directamente desde el botón de \"Agendar Llamada\" en la sección de contacto, o dejarme tus datos por aquí.",
+        "mock-offline": "¡Gracias por tu mensaje! 🚀 Actualmente estoy en modo offline. Una vez que subas la web a Vercel/Netlify con tu API Key, podré responderte con inteligencia artificial avanzada."
     },
     en: {
         "nav-obj": "Our Goal",
@@ -295,7 +310,22 @@ const translations = {
         "slogan": "Technology, dynamism, and results",
         "chat-tt": "Hi 👋 I'm Playbot, here to help you.",
         "chat-welc": "Hi! 👋 I'm PlayBot, your Playmatic assistant. How can I help you today?",
-        "chat-in": "Type a message..."
+        "chat-in": "Type a message...",
+        "chat-typing": "PlayBot is typing...",
+        "chat-err-sat": "I'm sorry, the AI service is temporarily saturated.",
+        "chat-err-proc": "I'm sorry, I couldn't process your response.",
+        "chat-err-conn": "Connection error with the server.",
+        "form-sending": "Sending...",
+        "form-sent": "Sent successfully!",
+        "form-err": "Error sending",
+        "form-err-conn": "Connection error",
+        "quiz-sent": "Report sent successfully!",
+        "quiz-err": "Error. Try again.",
+        "quiz-success-msg": "<h3>Check your inbox! 📬</h3><p>We just sent your personalized automation report to your email. (Please check your spam folder just in case).</p><a href=\"https://calendly.com/playmaticbusiness/30min\" class=\"btn-primary\" style=\"margin-top: 20px;\">Book direct call</a>",
+        "mock-price": "Our plans start at 49.99€ for initial setup and a monthly fee of just 29.99€ for the basic implementation. Would you like to see the service details?",
+        "mock-serv": "We offer DM automation, smart chatbots, lead capture, and sales funnels on social media. Everything so you don't lose a single client!",
+        "mock-contact": "You can book a call directly from the \"Book Call\" button in the contact section, or leave me your details here.",
+        "mock-offline": "Thanks for your message! 🚀 I'm currently in offline mode. Once you upload the site to Vercel/Netlify with your API Key, I'll be able to respond with advanced artificial intelligence."
     }
 };
 
