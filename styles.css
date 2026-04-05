@@ -991,15 +991,35 @@ body.loading, body.chat-active {
                     left 0.7s cubic-bezier(0.25, 1, 0.3, 1),
                     font-size 0.7s cubic-bezier(0.25, 1, 0.3, 1) !important;
         display: block !important;
+        z-index: 1003 !important;
     }
 
-    /* Logo Entrance State: Centered horizontally but vertically stays at 50% of the expanded nav */
+    /* Slogan Relocation: Moves to the top row with language selector to prevent center clutter */
+    .navbar .slogan-nav {
+        position: absolute !important;
+        top: 35px !important;
+        left: 5% !important;
+        transform: translateY(-50%) !important;
+        font-size: 0.75rem !important;
+        width: auto !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transition: opacity 0.5s ease !important;
+    }
+
+    .navbar.at-top .slogan-nav {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    /* Logo Entrance State: Vertically stays at 50% of the expanded nav, horizontally centered */
     .navbar.at-top .logo {
         left: 50% !important;
         transform: translate(calc(-50% + 2px), -50%) !important;
         font-size: 9.5vw !important;
         letter-spacing: 4px !important;
     }
+
 
     /* Component Stabilizers */
     .logo-img { max-width: 80vw; }
