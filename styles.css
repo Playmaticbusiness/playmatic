@@ -966,21 +966,29 @@ body.loading, body.chat-active {
 
 /* FINAL MOBILE OVERRIDES - RELOCATED TO BOTTOM FOR ABSOLUTE SPECIFICITY */
 @media (max-width: 768px) {
+    /* Stabilize navbar height on mobile to prevent layout shift during logo transition */
+    .navbar {
+        padding: 20px 5% !important;
+        transition: background 0.5s ease-out !important;
+    }
+
     /* Unified, single-movement fluid transition for mobile logo */
     .navbar .logo {
         position: absolute !important;
-        top: 50% !important;
+        top: 32px !important; /* Fixed pixel value to prevent percentage recalculation */
         left: 5% !important;
         width: auto !important;
         text-align: left !important;
         padding: 0 !important;
         margin: 0 !important;
-        /* Using translate(0, -50%) as the base state */
         transform: translate(0, -50%) !important;
         font-size: 1.8rem !important;
         letter-spacing: 4px !important;
-        /* Syncing transition timing with the navbar itself for a solid feel */
-        transition: all 0.5s cubic-bezier(0.25, 1, 0.3, 1) !important;
+        /* Explicit property transitions for perfect fluidity */
+        transition: transform 0.5s cubic-bezier(0.25, 1, 0.3, 1), 
+                    left 0.5s cubic-bezier(0.25, 1, 0.3, 1), 
+                    top 0.5s cubic-bezier(0.25, 1, 0.3, 1),
+                    font-size 0.5s cubic-bezier(0.25, 1, 0.3, 1) !important;
         display: block !important;
         z-index: 1001 !important;
     }
@@ -989,7 +997,6 @@ body.loading, body.chat-active {
     .navbar.at-top .logo {
         top: 130px !important;
         left: 50% !important;
-        /* Absolute centering with manual offset for letter-spacing (2px) */
         transform: translate(calc(-50% + 2px), -50%) !important;
         font-size: 9.5vw !important;
         letter-spacing: 4px !important;
