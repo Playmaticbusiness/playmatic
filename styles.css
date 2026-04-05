@@ -106,7 +106,7 @@ a { text-decoration: none; color: inherit; }
         top: 130px;
         left: 50% !important;
         transform: translate(-50%, -50%);
-        font-size: 10vw; /* Optimized for tablet */
+        font-size: 7vw; /* Fixed for tablet */
         background: none;
         -webkit-text-fill-color: var(--text-primary);
         color: var(--text-primary);
@@ -427,7 +427,7 @@ footer { border-top: 1px solid var(--surface-border); padding: 50px 5% 30px; mar
         top: 120px;
         left: 50% !important;
         transform: translate(-50%, -50%);
-        font-size: 12vw; /* Optimized for mobile */
+        font-size: 8vw; /* Fixed to prevent horizontal overflow */
         background: none;
         -webkit-text-fill-color: var(--text-primary);
         color: var(--text-primary);
@@ -758,10 +758,11 @@ footer { border-top: 1px solid var(--surface-border); padding: 50px 5% 30px; mar
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
+    height: 100dvh;
     background-color: var(--bg-color);
-    z-index: 9999;
+    z-index: 9999999;
     display: flex;
     justify-content: center;
     align-items: center;
