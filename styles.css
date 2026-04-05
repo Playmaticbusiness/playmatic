@@ -946,20 +946,38 @@ body.loading, body.chat-active {
 
 /* MASTER MOBILE OVERRIDES - CONSOLIDATED AT BOTTOM TO ELIMINATE REDUNDANCY */
 @media (max-width: 768px) {
-    /* Navbar Core: Locked height to prevent vertical jitter during scroll */
+    /* Navbar Core: Uses height animation to sync with logo movement */
     .navbar {
-        padding: 20px 5% !important;
-        transition: background 0.5s ease-out !important;
-    }
-    .navbar.at-top {
-        background: transparent !important;
-        padding: 20px 5% !important; /* Identical padding for zero-resize */
+        height: 70px !important;
+        padding: 0 5% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        background: rgba(13, 13, 16, 0.95) !important;
+        transition: height 0.7s cubic-bezier(0.25, 1, 0.3, 1), 
+                    background 0.5s ease !important;
     }
 
-    /* Master Logo Logic: Fluid transition using coordinate-based system */
+    /* Entrance State: Expanded navbar height drives the logo down */
+    .navbar.at-top {
+        height: 280px !important;
+        background: transparent !important;
+        border-bottom-color: transparent !important;
+    }
+
+    /* Fixed Language Selector: Remains in banner position regardless of navbar expansion */
+    .nav-actions {
+        position: absolute !important;
+        top: 35px !important;
+        right: 5% !important;
+        transform: translateY(-50%) !important;
+        z-index: 1002 !important;
+    }
+
+    /* Master Logo Logic: Locked at top: 50% for zero-jitter vertical centering */
     .navbar .logo {
         position: absolute !important;
-        top: 32px !important; /* Fixed central pixel for the banner */
+        top: 50% !important; /* Constant vertical anchor */
         left: 5% !important;
         width: auto !important;
         text-align: left !important;
@@ -968,35 +986,30 @@ body.loading, body.chat-active {
         transform: translate(0, -50%) !important;
         font-size: 1.8rem !important;
         letter-spacing: 4px !important;
-        /* Strictly synced transition for all properties */
-        transition: transform 0.5s cubic-bezier(0.25, 1, 0.3, 1), 
-                    left 0.5s cubic-bezier(0.25, 1, 0.3, 1), 
-                    top 0.5s cubic-bezier(0.25, 1, 0.3, 1),
-                    font-size 0.5s cubic-bezier(0.25, 1, 0.3, 1) !important;
+        /* Single coordinate path for transform and left */
+        transition: transform 0.7s cubic-bezier(0.25, 1, 0.3, 1), 
+                    left 0.7s cubic-bezier(0.25, 1, 0.3, 1),
+                    font-size 0.7s cubic-bezier(0.25, 1, 0.3, 1) !important;
         display: block !important;
     }
 
-    /* Logo - Entrance State */
+    /* Logo Entrance State: Centered horizontally but vertically stays at 50% of the expanded nav */
     .navbar.at-top .logo {
-        top: 130px !important;
         left: 50% !important;
-        transform: translate(calc(-50% + 2px), -50%) !important; /* Precision centering */
+        transform: translate(calc(-50% + 2px), -50%) !important;
         font-size: 9.5vw !important;
         letter-spacing: 4px !important;
     }
 
-    /* Layout & Component Overrides */
+    /* Component Stabilizers */
     .logo-img { max-width: 80vw; }
-    .hero { padding-top: 210px; padding-bottom: 30px; }
+    .hero { padding-top: 280px; padding-bottom: 30px; }
     .nav-links, .btn-cta-nav { display: none; }
-    .nav-actions { gap: 10px; }
-    .navbar.at-top .lang-selector { opacity: 0; pointer-events: none; transform: translateY(-10px); }
     .hero h1 { font-size: 2.2rem; min-height: 4.5em; }
     .hero p { font-size: 1rem; }
     .hero-actions { flex-direction: column; width: 100%; }
     .hero-actions a { width: 100%; }
     .section-title { font-size: 2rem; }
-    
     .footer-socials { flex-direction: column; gap: 15px; align-items: center; }
     .bottom-reveal-container { height: 250px; }
     .reveal-spacer { height: 250px; }
