@@ -432,29 +432,38 @@ footer { border-top: 1px solid var(--surface-border); padding: 50px 5% 30px; mar
        A full-width container that uses text-align. We disable left/translate horizontal animations 
        to prevent matrix interpolation wobble entirely, resulting in fluid vertical/font scaling 
        coupled with an instant horizontal orientation snap that respects constraints flawlessly. */
+    /* Ultimate solution for zero-wobble and perfect mathematical centering: 
+       A full-width container that uses text-align. We disable left/translate horizontal animations 
+       to prevent matrix interpolation wobble entirely. */
     .navbar .logo {
         left: 0 !important;
-        width: 100vw !important;
+        width: 100% !important;
         text-align: left;
-        padding-left: 5%;
-        margin-left: 0 !important;
+        padding: 0 5% !important;
+        margin: 0 !important;
         transform: translateY(-50%) !important;
         box-sizing: border-box;
         transition: font-size 0.4s ease, top 0.4s ease !important;
         pointer-events: none;
         z-index: 10;
+        display: block !important;
     }
     
     .navbar .logo a {
         pointer-events: auto;
     }
     
+    /* Extra specificity to override desktop at-top rules */
     .navbar.at-top .logo {
-        top: 120px;
-        text-align: center;
-        padding-left: 4px; /* Reduced offset to prevent right-clipping */
-        font-size: 8.5vw; /* Reduced from 11vw to fit 320px screens */
-        letter-spacing: 4px; /* Slightly tighter for mobile header */
+        top: 120px !important;
+        left: 0 !important;
+        width: 100% !important;
+        text-align: center !important;
+        padding: 0 15px !important;
+        margin: 0 !important;
+        transform: translateY(-50%) !important;
+        font-size: 7.5vw !important; /* Safe size for all mobile devices */
+        letter-spacing: 2px !important; /* Tighter for mobile to prevent overflow */
         background: none;
         -webkit-text-fill-color: var(--text-primary);
         color: var(--text-primary);
