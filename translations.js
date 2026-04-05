@@ -142,7 +142,11 @@ const translations = {
         "quiz-fin-title": "¡Análisis completado!",
         "quiz-fin-p": "Introduce tu email para recibir tu informe de automatización personalizado y una comparativa con tu competencia en Málaga.",
         "quiz-email": "Tu mejor email",
-        "quiz-submit": "Enviar mi Informe Gratuito"
+        "quiz-submit": "Enviar mi Informe Gratuito",
+        "slogan": "Tecnología, dinamismo y resultados",
+        "chat-tt": "Hola 👋 Soy Playbot y estoy aquí para ayudarte.",
+        "chat-welc": "¡Hola! 👋 Soy PlayBot, tu asistente de Playmatic. ¿En qué puedo ayudarte hoy?",
+        "chat-in": "Escribe un mensaje..."
     },
     en: {
         "nav-obj": "Our Goal",
@@ -287,7 +291,11 @@ const translations = {
         "quiz-fin-title": "Analysis complete!",
         "quiz-fin-p": "Enter your email to receive your personalized automation report and a comparison with your competitors in Málaga.",
         "quiz-email": "Your best email",
-        "quiz-submit": "Send My Free Report"
+        "quiz-submit": "Send My Free Report",
+        "slogan": "Technology, dynamism, and results",
+        "chat-tt": "Hi 👋 I'm Playbot, here to help you.",
+        "chat-welc": "Hi! 👋 I'm PlayBot, your Playmatic assistant. How can I help you today?",
+        "chat-in": "Type a message..."
     }
 };
 
@@ -422,7 +430,11 @@ const domMap = {
     ".service-card:nth-child(3) .value-breakdown": "serv-3-value",
     ".service-card:nth-child(3) .service-features": "serv-3-list",
     ".service-card:nth-child(3) .service-btn": "serv-3-btn",
-    ".guarantee-banner span": "serv-guar"
+    ".guarantee-banner span": "serv-guar",
+    ".slogan-nav": "slogan",
+    "#chat-tooltip p": "chat-tt",
+    "#chat-messages .message.bot p": "chat-welc",
+    "#chat-input": "chat-in"
 };
 
 window.setLanguage = function(lang) {
