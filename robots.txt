@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /Dashboard_Analiticas.html
+
+Sitemap: https://playmatic.es/sitemap.xml
