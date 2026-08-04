@@ -23,22 +23,22 @@ body { overflow-x: hidden; position: relative; }
 
 .blob-bg {
     position: fixed; top: -10vw; left: -10vw; width: 40vw; height: 40vw;
-    background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 70%);
-    border-radius: 50%; filter: blur(40px); z-index: -1; animation: drift 15s infinite alternate ease-in-out;
-    will-change: transform; transform: translateZ(0); backface-visibility: hidden;
+    background: radial-gradient(circle, rgba(0, 242, 254, 0.05) 0%, rgba(4, 4, 6, 0) 70%);
+    border-radius: 50%; z-index: -1; animation: drift 15s infinite alternate ease-in-out;
+    will-change: transform; transform: translate3d(0,0,0); backface-visibility: hidden;
 }
 .blob-bg.bg-2 {
     top: auto; bottom: -10vw; left: auto; right: -10vw;
-    background: radial-gradient(circle, rgba(120,120,125,0.04) 0%, rgba(0,0,0,0) 70%);
+    background: radial-gradient(circle, rgba(123, 44, 191, 0.05) 0%, rgba(4, 4, 6, 0) 70%);
     animation-direction: alternate-reverse; animation-duration: 20s;
 }
 
 @keyframes drift { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(5vw, 5vw, 0); } }
 
 .glass {
-    background: var(--surface); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    background: rgba(10, 10, 15, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
     border: 1px solid var(--surface-border); border-radius: 20px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-    transform: translateZ(0);
+    transform: translate3d(0,0,0); isolation: isolate;
 }
 .gradient-text { background: var(--gradient-text); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
 a { text-decoration: none; color: inherit; }
@@ -63,9 +63,9 @@ a { text-decoration: none; color: inherit; }
 
 .navbar {
     position: fixed; top: 0; width: 100%; padding: 15px 5%; display: flex; justify-content: space-between;
-    align-items: center; z-index: 1000; background: rgba(13, 13, 16, 0.95); backdrop-filter: blur(20px);
+    align-items: center; z-index: 1000; background: rgba(13, 13, 16, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--surface-border); transition: all 0.2s ease-out;
-    will-change: background, padding;
+    will-change: background, padding; transform: translate3d(0,0,0);
 }
 .navbar::before {
     content: '';

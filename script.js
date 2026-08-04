@@ -131,15 +131,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', onScroll, { passive: true });
 
-    // --- LENIS SMOOTH INERTIA SCROLL ENGINE (60 FPS fluid momentum, 0ms start latency) ---
+    // --- LENIS SMOOTH INERTIA SCROLL ENGINE (60 FPS VSYNC display binding) ---
     let lenis = null;
     if (typeof Lenis !== 'undefined') {
         lenis = new Lenis({
-            duration: 1.0,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Apple exponential ease-out
+            lerp: 0.12,
             smoothWheel: true,
             wheelMultiplier: 1.0,
-            touchMultiplier: 1.5,
+            touchMultiplier: 1.2,
         });
 
         function lenisRaf(time) {
