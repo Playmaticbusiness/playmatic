@@ -417,7 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
         typingIndicator.classList.add('typing');
 
         try {
-            // Llamamos a la Función de Netlify (Seguro y cumple con CORS)
+            // Intenta llamar a la función API si está disponible
             const response = await fetch('/api/chat', {
                 method: 'POST',
                 headers: {
@@ -429,36 +429,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
             });
 
-            const data = await response.json();
-            typingIndicator.remove();
+            if (response.ok) {
+                const data = await response.json();
+                typingIndicator.remove();
 
-            if (data.response) {
-                const botResponse = data.response;
-                conversationHistory.push({ role: 'assistant', content: botResponse }); // Record bot answer
-                appendMessage(botResponse, 'bot', true);
-            } else if (data.error) {
-                console.error('Chat Error:', data.error);
-                appendMessage(translations[lang]['chat-err-sat'], 'bot');
-            } else {
-                appendMessage(translations[lang]['chat-err-proc'], 'bot');
+                if (data && data.response) {
+                    const botResponse = data.response;
+                    conversationHistory.push({ role: 'assistant', content: botResponse }); // Record bot answer
+                    appendMessage(botResponse, 'bot', true);
+                    return;
+                }
             }
+            throw new Error('Endpoint no disponible en hosting estático');
         } catch (error) {
             typingIndicator.remove();
-            console.error('Error:', error);
-            appendMessage(translations[lang]['chat-err-conn'], 'bot');
+            // Respuesta inteligente de contingencia para GitHub Pages
+            const botResponse = getMockResponse(text);
+            conversationHistory.push({ role: 'assistant', content: botResponse });
+            appendMessage(botResponse, 'bot', true);
         }
     };
 
     const getMockResponse = (input) => {
         const query = input.toLowerCase();
         const lang = document.documentElement.lang || 'es';
-        if (query.includes('precio') || query.includes('coste') || query.includes('cuanto vale') || query.includes('price')) {
+        if (query.includes('hola') || query.includes('buenas') || query.includes('hi') || query.includes('hello')) {
+            return translations[lang]['mock-hello'] || translations[lang]['chat-welc'];
+        }
+        if (query.includes('precio') || query.includes('coste') || query.includes('cuanto vale') || query.includes('price') || query.includes('plan') || query.includes('tarifa')) {
             return translations[lang]['mock-price'];
         }
-        if (query.includes('servicio') || query.includes('haces') || query.includes('ofreces') || query.includes('services')) {
+        if (query.includes('servicio') || query.includes('haces') || query.includes('ofreces') || query.includes('services') || query.includes('bot') || query.includes('automatiz')) {
             return translations[lang]['mock-serv'];
         }
-        if (query.includes('contacto') || query.includes('hablar') || query.includes('llamada') || query.includes('contact')) {
+        if (query.includes('contacto') || query.includes('hablar') || query.includes('llamada') || query.includes('contact') || query.includes('reunion') || query.includes('cita')) {
             return translations[lang]['mock-contact'];
         }
         return translations[lang]['mock-offline'];

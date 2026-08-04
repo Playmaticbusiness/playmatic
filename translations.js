@@ -158,10 +158,11 @@ const translations = {
         "quiz-sent": "¡Informe enviado con éxito!",
         "quiz-err": "Error. Intenta de nuevo.",
         "quiz-success-msg": "<h3>¡Revisa tu bandeja de entrada! 📬</h3><p>Acabamos de enviarte el diagnóstico personalizado al correo que nos has dejado. (Revisa la carpeta de spam por si acaso).</p><a href=\"https://calendly.com/playmaticbusiness/30min\" class=\"btn-primary\" style=\"margin-top: 20px;\">Agendar llamada directa</a>",
-        "mock-price": "Nuestros planes empiezan desde 49,99€ de setup inicial y una cuota mensual de solo 29,99€ para la implementación básica. ¿Te gustaría ver el detalle de los servicios?",
-        "mock-serv": "Ofrecemos automatización de DMs, chatbots inteligentes, captura de leads y embudos de venta en redes sociales. ¡Todo para que no pierdas ni un cliente!",
-        "mock-contact": "Puedes agendar una llamada directamente desde el botón de \"Agendar Llamada\" en la sección de contacto, o dejarme tus datos por aquí.",
-        "mock-offline": "¡Gracias por tu mensaje! 🚀 Actualmente estoy en modo offline. Una vez que subas la web a Vercel/Netlify con tu API Key, podré responderte con inteligencia artificial avanzada."
+        "mock-hello": "¡Hola! 👋 Soy PlayBot, tu asistente de Playmatic. ¿En qué puedo ayudarte hoy? Puedo informarte sobre nuestros servicios de automatización, nuestros planes y precios, o ayudarte a agendar una llamada directa con nuestro equipo.",
+        "mock-price": "Nuestros planes empiezan desde <strong>49,99€ de setup inicial + 29,99€/mes</strong> para la implementación básica, o <strong>79,99€ setup + 49,99€/mes</strong> para automatización de marketing completa. 🚀 ¿Te gustaría ver más detalles o agendar una demo?",
+        "mock-serv": "Ofrecemos automatización de DMs en Instagram y WhatsApp, chatbots inteligentes 24/7, captura automática de leads (email/teléfono) y embudos de conversación para convertir seguidores en clientes. ⚡",
+        "mock-contact": "Puedes agendar una llamada directa de 30 minutos en nuestro <a href=\"https://calendly.com/playmaticbusiness/30min\" target=\"_blank\" style=\"color:#00f2fe;font-weight:600;\">Calendly</a>, o enviarnos un email a <strong>playmaticbusiness@gmail.com</strong>.",
+        "mock-offline": "¡Gracias por tu mensaje! 🚀 Soy PlayBot y estoy aquí para resolver tus dudas sobre la automatización de tu negocio en Málaga. ¿Te gustaría saber más sobre nuestros precios, servicios o agendar una llamada?"
     },
     en: {
         "nav-obj": "Our Goal",
@@ -322,10 +323,11 @@ const translations = {
         "quiz-sent": "Report sent successfully!",
         "quiz-err": "Error. Try again.",
         "quiz-success-msg": "<h3>Check your inbox! 📬</h3><p>We just sent your personalized automation report to your email. (Please check your spam folder just in case).</p><a href=\"https://calendly.com/playmaticbusiness/30min\" class=\"btn-primary\" style=\"margin-top: 20px;\">Book direct call</a>",
-        "mock-price": "Our plans start at 49.99€ for initial setup and a monthly fee of just 29.99€ for the basic implementation. Would you like to see the service details?",
-        "mock-serv": "We offer DM automation, smart chatbots, lead capture, and sales funnels on social media. Everything so you don't lose a single client!",
-        "mock-contact": "You can book a call directly from the \"Book Call\" button in the contact section, or leave me your details here.",
-        "mock-offline": "Thanks for your message! 🚀 I'm currently in offline mode. Once you upload the site to Vercel/Netlify with your API Key, I'll be able to respond with advanced artificial intelligence."
+        "mock-hello": "Hello! 👋 I'm PlayBot, your Playmatic assistant. How can I help you today? I can share details about our automation services, plans and pricing, or help you book a call with our team.",
+        "mock-price": "Our plans start at <strong>€49.99 setup + €29.99/month</strong> for basic implementation, or <strong>€79.99 setup + €49.99/month</strong> for full marketing automation. 🚀 Would you like to check the details or book a demo?",
+        "mock-serv": "We offer complete DM automation for Instagram & WhatsApp, 24/7 smart AI chatbots, lead capture (email/phone), and sales funnels to convert followers into clients. ⚡",
+        "mock-contact": "You can schedule a 30-minute discovery call directly on our <a href=\"https://calendly.com/playmaticbusiness/30min\" target=\"_blank\" style=\"color:#00f2fe;font-weight:600;\">Calendly</a> or send us an email at <strong>playmaticbusiness@gmail.com</strong>.",
+        "mock-offline": "Thanks for your message! 🚀 I'm PlayBot and I'm here to help automate your social media lead generation. Would you like to know more about our pricing, services, or book a direct call?"
     }
 };
 
