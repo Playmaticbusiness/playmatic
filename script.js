@@ -9,7 +9,7 @@ window.addEventListener('load', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Reveal Animations on Scroll
+    // High-Performance Reveal Animations on Scroll (IntersectionObserver)
     const reveals = document.querySelectorAll('.reveal');
     let demoAnimated = false;
 
@@ -56,28 +56,53 @@ document.addEventListener('DOMContentLoaded', () => {
         await showStep(2, 0); // 3. Bot message 2
     };
 
-    const revealOnScroll = () => {
-        const windowHeight = window.innerHeight;
-        reveals.forEach(reveal => {
-            const revealTop = reveal.getBoundingClientRect().top;
-            if (revealTop < windowHeight - 100) {
-                reveal.classList.add('active');
-                if (reveal.classList.contains('ig-mockup')) runDemoAnimation();
-            }
+    if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    if (entry.target.classList.contains('ig-mockup')) runDemoAnimation();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            root: null,
+            rootMargin: '0px 0px -50px 0px',
+            threshold: 0.15
         });
-    };
-    revealOnScroll();
+
+        reveals.forEach(reveal => revealObserver.observe(reveal));
+    } else {
+        const revealOnScrollFallback = () => {
+            const windowHeight = window.innerHeight;
+            reveals.forEach(reveal => {
+                const revealTop = reveal.getBoundingClientRect().top;
+                if (revealTop < windowHeight - 100) {
+                    reveal.classList.add('active');
+                    if (reveal.classList.contains('ig-mockup')) runDemoAnimation();
+                }
+            });
+        };
+        revealOnScrollFallback();
+        window.addEventListener('scroll', revealOnScrollFallback, { passive: true });
+    }
 
     // Navbar Background Blur Enhancements & Logo position
     const navbar = document.querySelector('.navbar');
+    const heroContent = document.querySelector('.hero-content');
 
-    // Set initial state — shows the big hero logo on page load
-    if (window.scrollY <= 50) {
-        navbar.classList.add('at-top');
+    let isAtTop = window.scrollY <= 50;
+    if (navbar) {
+        if (isAtTop) {
+            navbar.classList.add('at-top');
+            navbar.classList.remove('scrolled');
+        } else {
+            navbar.classList.add('scrolled');
+            navbar.classList.remove('at-top');
+        }
     }
 
-    // --- SINGLE THROTTLED SCROLL HANDLER (performance) ---
-    const heroContent = document.querySelector('.hero-content');
+    // --- OPTIMIZED SINGLE SCROLL HANDLER (Zero layout thrashing) ---
     let scrollRAF = null;
 
     const onScroll = () => {
@@ -86,15 +111,18 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollRAF = null;
             const scrolled = window.scrollY;
 
-            // 1. Reveal animations
-            revealOnScroll();
+            // 1. Navbar States (Only mutate DOM when state toggles)
+            const currentAtTop = scrolled <= 50;
+            if (currentAtTop !== isAtTop) {
+                isAtTop = currentAtTop;
+                if (navbar) {
+                    navbar.classList.toggle('scrolled', !isAtTop);
+                    navbar.classList.toggle('at-top', isAtTop);
+                }
+            }
 
-            // 2. Navbar States
-            navbar.classList.toggle('scrolled', scrolled > 50);
-            navbar.classList.toggle('at-top', scrolled <= 50);
-
-            // 3. Parallax (only in hero range, cheap check first)
-            if (scrolled < 600 && heroContent) {
+            // 2. Parallax (Only in top hero range)
+            if (scrolled <= 600 && heroContent) {
                 heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
                 heroContent.style.opacity = 1 - (scrolled / 500);
             }
@@ -353,53 +381,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const typingIndicator = appendMessage(translations[lang]['chat-typing'], 'bot');
         typingIndicator.classList.add('typing');
 
-        // Ofuscación básica de la API (evita robots scrapers)
-        const parts = ['gsk', '_xpmE', 'NUAUc', 'hpcIT', 'aog0E', 'UWGdy', 'b3FYi', 'rabJ9', 'Sh5AP', 'fEbM7', '57elO', 'e6n'];
-        const _k = parts.join('');
-        
-        const systemPrompt = `Eres PlayBot, el asistente inteligente de Playmatic, una agencia de automatización de redes sociales en Málaga.
-Tu misión es ayudar a los negocios a captar leads de forma automática y profesional.
-        
-INFORMACIÓN DE CONTACTO:
-- Instagram: https://instagram.com/playmaticteam
-- Email: playmaticbusiness@gmail.com
-- Calendly: https://calendly.com/playmaticbusiness/30min
-- Web: https://playmatic.github.io/playmatic/
-- Localización: Málaga, Costa del Sol.
-        
-SERVICIOS Y PRECIOS:
-- Básica: 49,99€ Setup + 29,99€/mes. Incluye Chatbot, FAQs, bienvenida automática.
-- Marketing: 79,99€ Setup + 49,99€/mes. Incluye Todo + Automatización de comentarios, captura de leads, embudos. (Más popular 🔥).
-- Empresas/Agencias: Precio "A Consultar". Soluciones a medida.
-        
-DIRECTRICES:
-- No hables de NADA ajeno a Playmatic.
-- Eres bilingüe (responde en el idioma del usuario).
-- Respuestas cortas, directas y con emojis (🚀, 🤖, ⚡, 📈, ✨).`;
-
         try {
-            // Llamamos directamente a Groq desde el FrontEnd (Independiente de Netlify)
-            const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+            // Llamamos a la Función de Netlify (Seguro y cumple con CORS)
+            const response = await fetch('/api/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + _k
                 },
                 body: JSON.stringify({
-                    model: 'llama-3.3-70b-versatile',
-                    messages: [
-                        { role: 'system', content: systemPrompt },
-                        ...conversationHistory
-                    ],
-                    temperature: 0.7
+                    message: text,
+                    history: conversationHistory.slice(0, -1) // Enviamos el historial previo a este mensaje
                 })
             });
 
             const data = await response.json();
             typingIndicator.remove();
 
-            if (data.choices && data.choices[0].message.content) {
-                const botResponse = data.choices[0].message.content;
+            if (data.response) {
+                const botResponse = data.response;
                 conversationHistory.push({ role: 'assistant', content: botResponse }); // Record bot answer
                 appendMessage(botResponse, 'bot', true);
             } else if (data.error) {

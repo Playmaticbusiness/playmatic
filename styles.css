@@ -25,7 +25,7 @@ body { overflow-x: hidden; position: relative; }
     position: fixed; top: -10vw; left: -10vw; width: 40vw; height: 40vw;
     background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 70%);
     border-radius: 50%; filter: blur(40px); z-index: -1; animation: drift 15s infinite alternate ease-in-out;
-    will-change: transform;
+    will-change: transform; transform: translateZ(0); backface-visibility: hidden;
 }
 .blob-bg.bg-2 {
     top: auto; bottom: -10vw; left: auto; right: -10vw;
@@ -33,11 +33,12 @@ body { overflow-x: hidden; position: relative; }
     animation-direction: alternate-reverse; animation-duration: 20s;
 }
 
-@keyframes drift { 0% { transform: translate(0, 0); } 100% { transform: translate(5vw, 5vw); } }
+@keyframes drift { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(5vw, 5vw, 0); } }
 
 .glass {
     background: var(--surface); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--surface-border); border-radius: 20px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    transform: translateZ(0);
 }
 .gradient-text { background: var(--gradient-text); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
 a { text-decoration: none; color: inherit; }
@@ -1041,4 +1042,18 @@ body.loading, body.chat-active {
     .bottom-reveal-container { height: 250px; }
     .reveal-spacer { height: 250px; }
     .giant-logo { font-size: 2.2rem; }
+}
+
+/* Performance & Rendering Optimizations (Zero Visual Impact) */
+.use-cases-section,
+.results-section,
+.services,
+.quiz-section,
+.cta-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 600px;
+}
+
+.btn-primary, .btn-secondary, .btn-cta-nav, .quiz-option, .chat-toggle, .social-link {
+    touch-action: manipulation;
 }

@@ -8,7 +8,7 @@ export const handler = async (event, context) => {
 
     try {
         const body = JSON.parse(event.body || '{}');
-        const { message } = body;
+        const { message, history } = body;
         const apiKey = process.env.GROQ_API_KEY;
 
         if (!apiKey) {
@@ -41,6 +41,13 @@ export const handler = async (event, context) => {
         - Respuestas cortas, directas y con emojis (🚀, 🤖, ⚡, 📈, ✨).
         `;
 
+        // Construir mensajes con historial
+        const messages = [
+            { role: 'system', content: systemPrompt },
+            ...(history || []),
+            { role: 'user', content: message }
+        ];
+
         // Llamamos a la API de Groq (Llama 3.3 70B)
         const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
             method: 'POST',
@@ -50,10 +57,7 @@ export const handler = async (event, context) => {
             },
             body: JSON.stringify({
                 model: 'llama-3.3-70b-versatile',
-                messages: [
-                    { role: 'system', content: systemPrompt },
-                    { role: 'user', content: message }
-                ],
+                messages: messages,
                 temperature: 0.7
             })
         });
