@@ -131,7 +131,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', onScroll, { passive: true });
 
-    // Smooth scroll only when clicking navigation anchor links (#)
+    // --- LENIS SMOOTH INERTIA SCROLL ENGINE (60 FPS fluid momentum, 0ms start latency) ---
+    let lenis = null;
+    if (typeof Lenis !== 'undefined') {
+        lenis = new Lenis({
+            duration: 1.0,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Apple exponential ease-out
+            smoothWheel: true,
+            wheelMultiplier: 1.0,
+            touchMultiplier: 1.5,
+        });
+
+        function lenisRaf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(lenisRaf);
+        }
+        requestAnimationFrame(lenisRaf);
+    }
+
+    // Smooth scroll for anchor clicks using Lenis or fallback
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
@@ -139,7 +157,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
                     e.preventDefault();
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                    if (lenis) {
+                        lenis.scrollTo(targetElement, { offset: -20, duration: 1.2 });
+                    } else {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
                 }
             }
         });

@@ -419,7 +419,7 @@ footer { border-top: 1px solid var(--surface-border); padding: 50px 5% 30px; mar
 @keyframes fadeUpAnim { to { opacity: 1; transform: translateY(0); } }
 @keyframes fadeInAnim { to { opacity: 1; } }
 
-.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.35s ease-out, transform 0.35s ease-out; will-change: opacity, transform; }
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); will-change: opacity, transform; }
 .reveal.active { opacity: 1; transform: translate(0) scale(1) rotateX(0deg) !important; }
 
 /* Modifiers */
@@ -1057,3 +1057,9 @@ body.loading, body.chat-active {
 .btn-primary, .btn-secondary, .btn-cta-nav, .quiz-option, .chat-toggle, .social-link {
     touch-action: manipulation;
 }
+
+/* Lenis Smooth Inertia Scroll Styles */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
