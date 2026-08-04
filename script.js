@@ -131,46 +131,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', onScroll, { passive: true });
 
-    // --- ULTRA-SMOOTH MOMENTUM WHEEL SCROLLING (Lenis-like smooth lerp for desktop) ---
-    if (window.innerWidth > 900 && !('ontouchstart' in window)) {
-        let currentY = window.scrollY;
-        let targetY = window.scrollY;
-        let isSmoothScrolling = false;
-
-        const lerpScroll = () => {
-            const diff = targetY - currentY;
-            if (Math.abs(diff) > 0.5) {
-                currentY += diff * 0.12;
-                window.scrollTo(0, currentY);
-                requestAnimationFrame(lerpScroll);
-            } else {
-                currentY = targetY;
-                window.scrollTo(0, currentY);
-                isSmoothScrolling = false;
+    // Smooth scroll only when clicking navigation anchor links (#)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (targetId && targetId !== '#') {
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
             }
-        };
-
-        window.addEventListener('wheel', (e) => {
-            if (e.target.closest('#chat-messages') || e.target.closest('.chat-messages')) return;
-            
-            e.preventDefault();
-            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-            targetY = Math.min(Math.max(0, targetY + e.deltaY * 0.85), maxScroll);
-            
-            if (!isSmoothScrolling) {
-                isSmoothScrolling = true;
-                currentY = window.scrollY;
-                requestAnimationFrame(lerpScroll);
-            }
-        }, { passive: false });
-
-        window.addEventListener('scroll', () => {
-            if (!isSmoothScrolling) {
-                currentY = window.scrollY;
-                targetY = window.scrollY;
-            }
-        }, { passive: true });
-    }
+        });
+    });
 
 
     // Web3Forms AJAX Submission
