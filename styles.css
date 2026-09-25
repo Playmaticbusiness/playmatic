@@ -1207,6 +1207,10 @@ html.lenis, html.lenis body { height: auto; }
     padding-bottom: 30px;
 }
 
+.footer-nav-grid.legal-grid {
+    grid-template-columns: 2fr 1fr;
+}
+
 .footer-col h4 {
     color: #ffffff;
     font-size: 1rem;
@@ -1257,27 +1261,82 @@ html.lenis, html.lenis body { height: auto; }
 }
 
 @media (max-width: 768px) {
-    .footer-nav-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
+    .footer-nav-grid,
+    .footer-nav-grid.legal-grid {
+        grid-template-columns: 1fr !important;
+        gap: 36px;
+        text-align: center;
+    }
+
+    .footer-brand {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         text-align: center;
     }
 
     .footer-brand-desc {
-        max-width: 100%;
+        max-width: 320px;
+        margin: 0 auto 16px;
+        text-align: center;
     }
 
     .footer-brand .footer-socials {
         justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 10px;
     }
 
-    .footer-col ul li a:hover,
-    .footer-legal-btn:hover {
-        transform: none;
+    .footer-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+    }
+
+    .footer-col h4 {
+        margin-bottom: 14px;
+        text-align: center;
+        font-size: 1.05rem;
     }
 
     .footer-col ul {
         align-items: center;
+        text-align: center;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .footer-col ul li {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .footer-col ul li a,
+    .footer-legal-btn {
+        text-align: center;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4px 8px;
+        font-size: 0.95rem;
+        transform: none !important;
+        white-space: normal;
+    }
+
+    .footer-col ul li a:hover,
+    .footer-legal-btn:hover {
+        transform: none !important;
+        color: var(--accent);
+    }
+
+    .footer-bottom {
+        padding-bottom: 50px;
+        text-align: center;
     }
 }
 
