@@ -244,35 +244,6 @@ a { text-decoration: none; color: inherit; }
     color: var(--accent);
     flex-shrink: 0;
 }
-.live-dot {
-    position: relative;
-    display: inline-flex;
-    width: 7px;
-    height: 7px;
-    margin-right: 2px;
-}
-.live-dot-ping {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    background-color: var(--accent);
-    opacity: 0.75;
-    animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-.live-dot-core {
-    position: relative;
-    display: inline-flex;
-    border-radius: 50%;
-    width: 7px;
-    height: 7px;
-    background-color: var(--accent);
-}
-@keyframes ping {
-    75%, 100% {
-        transform: scale(2.2);
-        opacity: 0;
-    }
-}
 
 @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
