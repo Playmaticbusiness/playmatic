@@ -1825,6 +1825,18 @@ html.lenis, html.lenis body { height: auto; }
     gap: 16px;
 }
 
+@media (min-width: 900px) {
+    .integration-group.group-crm .integrations-cards-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .integration-card.card-make {
+        grid-column: 1 / -1;
+        justify-self: center;
+        width: calc((100% - 3 * 16px) / 4);
+        margin: 0 auto;
+    }
+}
+
 .integration-card {
     display: flex;
     align-items: center;
