@@ -639,6 +639,29 @@ document.addEventListener('DOMContentLoaded', () => {
         updateProgress();
     }
 
+    // FAQ Accordion Handler (Accessible with Keyboard & Click Support)
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const trigger = item.querySelector('.faq-trigger');
+        if (!trigger) return;
+        trigger.addEventListener('click', () => {
+            const isCurrentlyActive = item.classList.contains('active');
+            
+            // Close all items smoothly
+            faqItems.forEach(otherItem => {
+                otherItem.classList.remove('active');
+                const otherTrigger = otherItem.querySelector('.faq-trigger');
+                if (otherTrigger) otherTrigger.setAttribute('aria-expanded', 'false');
+            });
+            
+            // Toggle clicked item
+            if (!isCurrentlyActive) {
+                item.classList.add('active');
+                trigger.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+
     sendBtn.addEventListener('click', handleSendMessage);
     chatInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') handleSendMessage();
