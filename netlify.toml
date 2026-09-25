@@ -3,6 +3,21 @@
   functions = "api"
 
 [[redirects]]
+  from = "/aviso-legal"
+  to = "/aviso-legal.html"
+  status = 200
+
+[[redirects]]
+  from = "/politica-de-privacidad"
+  to = "/politica-de-privacidad.html"
+  status = 200
+
+[[redirects]]
+  from = "/politica-de-cookies"
+  to = "/politica-de-cookies.html"
+  status = 200
+
+[[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200

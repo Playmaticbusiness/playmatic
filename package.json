@@ -1,14 +1,25 @@
 {
-  "name": "playmatic-analytics",
+  "name": "playmatic",
   "version": "1.0.0",
-  "description": "Herramienta local para generar reportes de Playmatic",
-  "main": "scripts/analytics-report.js",
+  "description": "Playmatic - Web y Servicio Webhook de Instagram Messaging",
+  "main": "dist/server.js",
   "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
     "report": "node scripts/analytics-report.js"
   },
   "dependencies": {
     "@google-analytics/data": "^4.11.0",
+    "dotenv": "^16.4.7",
     "exceljs": "^4.4.0",
+    "express": "^4.21.2",
     "googleapis": "^144.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
   }
 }
