@@ -43,14 +43,14 @@ const translations = {
         "serv-guar": "7 días de prueba o garantía de reembolso total al 100%"
 ,
         "hero-title": "Convierte Seguidores en<br><span class=\"typing-wrapper\"><span class=\"gradient-text typing-text\" id=\"typing-text\">Clientes</span><span class=\"typing-cursor\">|</span></span><br>en Automático",
-        "hero-desc": "Playmatic es la agencia especializada en automatización de mensajes y chatbots para negocios locales en <span class=\"location-highlight\">📍 Málaga</span> que quieren captar clientes desde redes sociales.",
+        "hero-desc": "Playmatic es la agencia especializada en automatización de mensajes y chatbots para negocios locales en <span class=\"location-highlight\"><svg class=\"location-icon\" viewBox=\"0 0 24 24\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z\"></path><circle cx=\"12\" cy=\"10\" r=\"3\"></circle></svg> Málaga</span> que quieren captar clientes desde redes sociales.",
         "hero-btn-1": "Descubre Cómo",
         "hero-btn-2": "Ver Servicios",
-        "marquee-1": "⚡ Generación de Leads",
-        "marquee-2": "🤖 Chatbots Inteligentes",
-        "marquee-3": "📈 Mayor Conversión",
-        "marquee-4": "⏱️ Ahorro de Tiempo",
-        "marquee-5": "🚀 Automatización 24/7",
+        "marquee-1": "<svg class=\"marquee-icon\" viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polygon points=\"13 2 3 14 12 14 11 22 21 10 12 10 13 2\"></polygon></svg> Generación de Leads",
+        "marquee-2": "<svg class=\"marquee-icon\" viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect width=\"18\" height=\"12\" x=\"3\" y=\"6\" rx=\"2\"></rect><circle cx=\"9\" cy=\"12\" r=\"1.2\" fill=\"currentColor\"></circle><circle cx=\"15\" cy=\"12\" r=\"1.2\" fill=\"currentColor\"></circle><path d=\"M12 2v4\"></path><path d=\"M2 12h1\"></path><path d=\"M21 12h1\"></path></svg> Chatbots Inteligentes",
+        "marquee-3": "<svg class=\"marquee-icon\" viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"22 7 13.5 15.5 8.5 10.5 2 17\"></polyline><polyline points=\"16 7 22 7 22 13\"></polyline></svg> Mayor Conversión",
+        "marquee-4": "<svg class=\"marquee-icon\" viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"></circle><polyline points=\"12 6 12 12 16 14\"></polyline></svg> Ahorro de Tiempo",
+        "marquee-5": "<span class=\"live-dot\"><span class=\"live-dot-ping\"></span><span class=\"live-dot-core\"></span></span><svg class=\"marquee-icon\" viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z\"></path><path d=\"m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z\"></path><path d=\"M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0\"></path><path d=\"M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5\"></path></svg> Automatización 24/7",
         
         "obj-title": "Nuestro Objetivo",
         "obj-p1": "En Playmatic nacemos con una misión clara: <strong>acercar la atención al cliente de la empresa al propio cliente de forma inmediata.</strong>",
@@ -208,14 +208,14 @@ const translations = {
         "serv-guar": "7-day trial or 100% full money-back guarantee"
 ,
         "hero-title": "Turn Followers into<br><span class=\"typing-wrapper\"><span class=\"gradient-text typing-text\" id=\"typing-text\">Clients</span><span class=\"typing-cursor\">|</span></span><br>Automatically",
-        "hero-desc": "Playmatic is the specialized agency in message automation and chatbots for local businesses in <span class=\"location-highlight\">📍 Málaga</span> that want to capture clients from social media.",
+        "hero-desc": "Playmatic is the specialized agency in message automation and chatbots for local businesses in <span class=\"location-highlight\"><svg class=\"location-icon\" viewBox=\"0 0 24 24\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z\"></path><circle cx=\"12\" cy=\"10\" r=\"3\"></circle></svg> Málaga</span> that want to capture clients from social media.",
         "hero-btn-1": "Discover How",
         "hero-btn-2": "View Services",
-        "marquee-1": "⚡ Lead Generation",
-        "marquee-2": "🤖 Smart Chatbots",
-        "marquee-3": "📈 Higher Conversion",
-        "marquee-4": "⏱️ Time Saved",
-        "marquee-5": "🚀 24/7 Automation",
+        "marquee-1": "<svg class=\"marquee-icon\" viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polygon points=\"13 2 3 14 12 14 11 22 21 10 12 10 13 2\"></polygon></svg> Lead Generation",
+        "marquee-2": "<svg class=\"marquee-icon\" viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect width=\"18\" height=\"12\" x=\"3\" y=\"6\" rx=\"2\"></rect><circle cx=\"9\" cy=\"12\" r=\"1.2\" fill=\"currentColor\"></circle><circle cx=\"15\" cy=\"12\" r=\"1.2\" fill=\"currentColor\"></circle><path d=\"M12 2v4\"></path><path d=\"M2 12h1\"></path><path d=\"M21 12h1\"></path></svg> Smart Chatbots",
+        "marquee-3": "<svg class=\"marquee-icon\" viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"22 7 13.5 15.5 8.5 10.5 2 17\"></polyline><polyline points=\"16 7 22 7 22 13\"></polyline></svg> Higher Conversion",
+        "marquee-4": "<svg class=\"marquee-icon\" viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"></circle><polyline points=\"12 6 12 12 16 14\"></polyline></svg> Time Saved",
+        "marquee-5": "<span class=\"live-dot\"><span class=\"live-dot-ping\"></span><span class=\"live-dot-core\"></span></span><svg class=\"marquee-icon\" viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z\"></path><path d=\"m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z\"></path><path d=\"M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0\"></path><path d=\"M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5\"></path></svg> 24/7 Automation",
         
         "obj-title": "Our Commitment",
         "obj-p1": "At Playmatic we are born with a clear mission: <strong>to bring the company's customer service closer to the client immediately.</strong>",
@@ -495,10 +495,10 @@ window.setLanguage = function(lang) {
     const marqueeSpans = document.querySelectorAll('.marquee-track span');
     marqueeSpans.forEach(span => {
         let text = span.textContent;
-        if(text.includes('Leads') || text.includes('Generación') || text.includes('Lead Generation')) span.textContent = translations[lang]['marquee-1'];
-        if(text.includes('Chatbots') || text.includes('Inteligentes') || text.includes('Smart Chatbots')) span.textContent = translations[lang]['marquee-2'];
-        if(text.includes('Conversión') || text.includes('Conversion')) span.textContent = translations[lang]['marquee-3'];
-        if(text.includes('Tiempo') || text.includes('Saved')) span.textContent = translations[lang]['marquee-4'];
-        if(text.includes('Automatización') || text.includes('Automation')) span.textContent = translations[lang]['marquee-5'];
+        if(text.includes('Leads') || text.includes('Generación') || text.includes('Lead Generation')) span.innerHTML = translations[lang]['marquee-1'];
+        if(text.includes('Chatbots') || text.includes('Inteligentes') || text.includes('Smart Chatbots')) span.innerHTML = translations[lang]['marquee-2'];
+        if(text.includes('Conversión') || text.includes('Conversion')) span.innerHTML = translations[lang]['marquee-3'];
+        if(text.includes('Tiempo') || text.includes('Saved')) span.innerHTML = translations[lang]['marquee-4'];
+        if(text.includes('Automatización') || text.includes('Automation')) span.innerHTML = translations[lang]['marquee-5'];
     });
 };
