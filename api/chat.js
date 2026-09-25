@@ -25,7 +25,7 @@ export const handler = async (event, context) => {
         
         INFORMACIÓN DE CONTACTO:
         - Instagram: https://instagram.com/playmaticteam
-        - Email: playmaticbusiness@gmail.com
+        - Email: contacto@playmatic.es
         - Calendly: https://calendly.com/playmaticbusiness/30min
         - Web: https://playmatic.netlify.app/
         - Localización: Málaga, Costa del Sol.
