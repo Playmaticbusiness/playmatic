@@ -38,7 +38,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@700;800&display=swap" rel="stylesheet">
     <script defer src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
     <script defer src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <link rel="stylesheet" href="styles.css?v=7.0">
+    <link rel="stylesheet" href="styles.css?v=8.0">
+    <style>
+        @media (min-width: 860px) {
+            .integration-group.group-crm .integrations-cards-grid {
+                grid-template-columns: repeat(8, 1fr) !important;
+            }
+            .integration-group.group-crm .integration-card {
+                grid-column: span 2 !important;
+            }
+            .integration-group.group-crm .integration-card.card-make {
+                grid-column: 4 / span 2 !important;
+                width: 100% !important;
+                margin: 0 !important;
+            }
+        }
+    </style>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -1083,8 +1098,8 @@
         </div>
     </div>
 
-    <script src="translations.js?v=7.0"></script>
-    <script src="script.js?v=7.0"></script>
+    <script src="translations.js?v=8.0"></script>
+    <script src="script.js?v=8.0"></script>
     <script src="cookie-banner.js" defer></script>
 </body>
 

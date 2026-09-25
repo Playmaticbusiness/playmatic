@@ -1844,15 +1844,17 @@ html.lenis, html.lenis body { height: auto; }
     gap: 16px;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 860px) {
     .integration-group.group-crm .integrations-cards-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(8, 1fr);
     }
-    .integration-card.card-make {
-        grid-column: 1 / -1;
-        justify-self: center;
-        width: calc((100% - 3 * 16px) / 4);
-        margin: 0 auto;
+    .integration-group.group-crm .integration-card {
+        grid-column: span 2;
+    }
+    .integration-group.group-crm .integration-card.card-make {
+        grid-column: 4 / span 2;
+        width: 100%;
+        margin: 0;
     }
 }
 
