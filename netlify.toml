@@ -18,6 +18,11 @@
   status = 200
 
 [[redirects]]
+  from = "/terminos-y-condiciones"
+  to = "/terminos-y-condiciones.html"
+  status = 200
+
+[[redirects]]
   from = "/borrador"
   to = "/borrador.html"
   status = 200

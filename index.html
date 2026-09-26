@@ -38,7 +38,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@700;800&display=swap" rel="stylesheet">
     <script defer src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
     <script defer src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <link rel="stylesheet" href="styles.css?v=8.0">
+    <link rel="stylesheet" href="styles.css?v=8.2">
     <style>
         @media (min-width: 860px) {
             .integration-group.group-crm .integrations-cards-grid {
@@ -811,7 +811,35 @@
                             <input type="hidden" name="q4_seguidores" id="q4_seguidores_input">
 
                             <input type="email" name="email" id="quiz-email" placeholder="Tu mejor email" required>
+
+                            <div class="form-privacy-group" style="margin-top: 15px; text-align: left;">
+                                <label class="checkbox-container">
+                                    <input type="checkbox" id="quiz-privacy-consent" name="privacy_consent" required>
+                                    <span class="checkmark"></span>
+                                    <span class="checkbox-text" style="font-size: 0.85rem; color: var(--text-secondary);">
+                                        He leído y acepto la <a href="politica-de-privacidad.html" target="_blank" rel="noopener noreferrer">Política de Privacidad</a> y los <a href="terminos-y-condiciones.html" target="_blank" rel="noopener noreferrer">Términos y Condiciones</a>.
+                                    </span>
+                                </label>
+                            </div>
+
                             <button type="submit" class="btn-primary glow-effect w-full mt-4" id="quiz-submit-btn">Enviar mi Informe Gratuito</button>
+
+                            <div class="rgpd-first-layer" style="margin-top: 15px; text-align: left;">
+                                <div class="rgpd-first-layer-title">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    </svg>
+                                    Información Básica sobre Protección de Datos
+                                </div>
+                                <ul>
+                                    <li><strong>Responsable:</strong> Playmatic</li>
+                                    <li><strong>Finalidad:</strong> Remitirle el informe de automatización personalizado y recomendaciones para su negocio.</li>
+                                    <li><strong>Legitimación:</strong> Su consentimiento expreso al enviar el formulario.</li>
+                                    <li><strong>Destinatarios:</strong> No se cederán datos a terceros salvo obligación legal o proveedores esenciales (Web3Forms).</li>
+                                    <li><strong>Derechos:</strong> Acceso, rectificación, supresión y otros en <a href="mailto:contacto@playmatic.es">contacto@playmatic.es</a>.</li>
+                                    <li><strong>Más información:</strong> Consulte nuestra <a href="politica-de-privacidad.html" target="_blank" rel="noopener noreferrer">Política de Privacidad</a>.</li>
+                                </ul>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -939,7 +967,7 @@
                                 <input type="checkbox" id="privacy-consent" name="privacy_consent" required>
                                 <span class="checkmark"></span>
                                 <span class="checkbox-text">
-                                    He leído y acepto la <a href="politica-de-privacidad.html" target="_blank" rel="noopener noreferrer">Política de Privacidad</a>.
+                                    He leído y acepto la <a href="politica-de-privacidad.html" target="_blank" rel="noopener noreferrer">Política de Privacidad</a> y los <a href="terminos-y-condiciones.html" target="_blank" rel="noopener noreferrer">Términos y Condiciones</a>.
                                 </span>
                             </label>
                         </div>
@@ -986,7 +1014,7 @@
             <div class="footer-content">
                 <div class="footer-nav-grid">
                     <div class="footer-col footer-brand">
-                        <a href="#top" class="legal-logo-link"><img src="playmatic-logo-blue.png" alt="Playmatic" class="legal-footer-logo"></a>
+                        <a href="#top" class="footer-logo-link" title="Playmatic"><span class="footer-logo-text">PLAYMATIC</span></a>
                         <p class="footer-brand-desc">Agencia de Automatización de Redes Sociales y Soluciones con IA en Málaga. Tecnología, dinamismo y resultados.</p>
                         <div class="footer-socials">
                             <a href="https://www.instagram.com/playmaticteam/" target="_blank" class="social-link">
@@ -1026,6 +1054,7 @@
                             <li><a href="aviso-legal.html">Aviso Legal</a></li>
                             <li><a href="politica-de-privacidad.html">Política de Privacidad</a></li>
                             <li><a href="politica-de-cookies.html">Política de Cookies</a></li>
+                            <li><a href="terminos-y-condiciones.html">Términos y Condiciones</a></li>
                             <li><button type="button" class="footer-legal-btn" onclick="openCookieSettings()"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>Configuración de Cookies</button></li>
                         </ul>
                     </div>
@@ -1066,7 +1095,7 @@
             </div>
             <div class="chat-messages" id="chat-messages">
                 <div class="message bot">
-                    <p>¡Hola! 👋 Soy PlayBot, tu asistente de Playmatic. ¿En qué puedo ayudarte hoy?</p>
+                    <p>¡Hola! 👋 Soy PlayBot, el asistente virtual con inteligencia artificial de Playmatic. ¿En qué puedo ayudarte hoy?</p>
                 </div>
             </div>
             <div class="chat-input-area">
@@ -1093,7 +1122,7 @@
             </svg>
         </button>
         <div class="chat-tooltip glass" id="chat-tooltip">
-            <p>Hola 👋 Soy Playbot y estoy aquí para ayudarte.</p>
+            <p>¡Hola! 👋 Soy PlayBot, tu asistente con IA listo para ayudarte.</p>
             <button id="close-tooltip" class="close-tooltip">&times;</button>
         </div>
     </div>
